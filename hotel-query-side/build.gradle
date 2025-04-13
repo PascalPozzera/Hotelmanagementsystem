@@ -21,7 +21,7 @@ dependencies {
     implementation 'io.quarkiverse.logging.logback:quarkus-logging-logback:1.1.2'
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
-    //implementation project(':share-events')
+    implementation project(':share-events')
 }
 
 
