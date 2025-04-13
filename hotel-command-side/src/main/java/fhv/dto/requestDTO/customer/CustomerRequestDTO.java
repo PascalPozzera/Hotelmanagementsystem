@@ -1,7 +1,11 @@
 package fhv.dto.requestDTO.customer;
 
 import jakarta.ws.rs.QueryParam;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class CustomerRequestDTO {
 
     @QueryParam("firstName")
@@ -12,8 +16,4 @@ public class CustomerRequestDTO {
 
     @QueryParam("email")
     private String email;
-
-    @QueryParam("phone")
-    private String phoneNumber;
-
 }
