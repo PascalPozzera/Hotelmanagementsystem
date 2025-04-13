@@ -1,7 +1,7 @@
-package fhv.controller;
+package fhv.eventbus.controller;
 
 import at.fhv.sys.hotel.commands.shared.events.CustomerCreated;
-import fhv.services.EventProcessingService;
+import fhv.eventbus.services.EventProcessingService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;

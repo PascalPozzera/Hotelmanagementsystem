@@ -1,4 +1,4 @@
-package fhv;
+package fhv.eventbus;
 
 import io.quarkus.runtime.Quarkus;
 import io.quarkus.runtime.StartupEvent;
