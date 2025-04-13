@@ -1,18 +1,32 @@
 version: '3.8'
 
 services:
-  postgres:
+  eventstore-db:
+    image: postgres:15
+    container_name: eventstore-db
+    restart: always
+    environment:
+      POSTGRES_DB: eventstore
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"  # Wichtig!!! -> 5432 extern, 5432 intern
+    volumes:
+      - eventstore_data:/var/lib/postgresql/data
+
+  query-db:
     image: postgres:16
-    container_name: postgres-db
+    container_name: query-db
     restart: always
     environment:
       POSTGRES_USER: sys
       POSTGRES_PASSWORD: sys
       POSTGRES_DB: sys
     ports:
-      - "5432:5432"
+      - "5433:5432"   # Wichtig!!! -> 5433 extern, 5432 intern
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - query_data:/var/lib/postgresql/data
 
 volumes:
-  postgres-data:
+  eventstore_data:
+  query_data:
