@@ -8,4 +8,7 @@ pluginManagement {
         id "${quarkusPluginId}" version "${quarkusPluginVersion}"
     }
 }
+
+include 'share-events'
+project(':share-events').projectDir = file('../share-events')
 rootProject.name = 'eventbus'
