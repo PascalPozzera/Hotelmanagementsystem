@@ -31,5 +31,6 @@ public class CustomerCreated {
     @Override
     public String toString() {
         return "CustomerCreated{" + "userId='" + userId + '\'' + ", email='" + email + '\'' + '}';
+
     }
 }
