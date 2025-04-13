@@ -8,6 +8,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/eventbus" />
+            <option value="$PROJECT_DIR$/share-events" />
           </set>
         </option>
       </GradleProjectSettings>
@@ -24,6 +25,14 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/hotel-query-side" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/share-events" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/share-events" />
           </set>
         </option>
       </GradleProjectSettings>
