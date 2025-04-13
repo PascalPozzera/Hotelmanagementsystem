@@ -16,11 +16,11 @@ public class CustomerAggregate {
     EventBusClient eventClient;
 
     public String handle(CreateCustomerCommand command) {
-        CustomerCreated event = new CustomerCreated(command.userId(), command.email());
+        CustomerCreated event = new CustomerCreated(command.customerId(), command.firstName(), command.lastName(), command.email());
 
         Logger.getAnonymousLogger().info(eventClient.processCustomerCreatedEvent(event).toString());
 
-        return command.userId();
+        return command.customerId();
     }
 
 }

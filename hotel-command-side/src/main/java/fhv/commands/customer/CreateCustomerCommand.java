@@ -1,6 +1,6 @@
 package fhv.commands.customer;
 
 
-public record CreateCustomerCommand(String userId, String name, String email) {
-
+public record CreateCustomerCommand(String customerId, String firstName, String lastName, String email) {
 }
+

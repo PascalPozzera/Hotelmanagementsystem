@@ -21,12 +21,19 @@ public class CustomerProjection {
 
     public void processCustomerCreatedEvent(CustomerCreated customerCreatedEvent) {
         Logger.getAnonymousLogger().info("Processing event: " + customerCreatedEvent);
-        customerService.createCustomer(new CustomerQueryModel(customerCreatedEvent.getUserId(), customerCreatedEvent.getEmail()));
 
-        CustomerQueryPanacheModel customer = new CustomerQueryPanacheModel();
-        customer.userId = customerCreatedEvent.getUserId();
-        customer.email = customerCreatedEvent.getEmail();
+        customerService.createCustomer(new CustomerQueryModel(
+                customerCreatedEvent.getUserId(),
+                customerCreatedEvent.getFirstName(),
+                customerCreatedEvent.getLastName(),
+                customerCreatedEvent.getEmail()));
+
+        CustomerQueryPanacheModel customer = new CustomerQueryPanacheModel(
+                customerCreatedEvent.getUserId(),
+                customerCreatedEvent.getFirstName(),
+                customerCreatedEvent.getLastName(),
+                customerCreatedEvent.getEmail());
+
         customerServicePanache.createCustomer(customer);
-
     }
 }

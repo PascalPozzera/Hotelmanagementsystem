@@ -1,9 +1,13 @@
 package fhv.controller;
 
+import at.fhv.sys.hotel.commands.shared.events.CustomerCreated;
 import fhv.commands.customer.CreateCustomerCommand;
 import fhv.commands.customer.CustomerAggregate;
+import fhv.dto.requestDTO.customer.CustomerRequestDTO;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+
+import java.util.UUID;
 
 @Path("/api")
 @Produces(MediaType.APPLICATION_JSON)
@@ -18,8 +22,9 @@ public class CustomerCommandController {
 
     @POST
     @Path("/createCustomer")
-    public String createCustomer(@QueryParam("customerId") String customerId, @QueryParam("name") String name, @QueryParam("email") String email) {
-        return customerAggregate.handle(new CreateCustomerCommand(customerId, name, email));
+    public String createCustomer(@BeanParam CustomerRequestDTO requestDTO) {
+        String generatedId = UUID.randomUUID().toString();
+        return customerAggregate.handle(new CreateCustomerCommand(generatedId, requestDTO.getFirstName(), requestDTO.getLastname(), requestDTO.getEmail()));
     }
 
     @POST
