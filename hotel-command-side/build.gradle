@@ -18,7 +18,7 @@ dependencies {
     implementation 'io.quarkus:quarkus-rest-client-jackson'
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
-    //implementation project(':share-events')
+    implementation project(':share-events')
 }
 group 'fhv'
 version '1.0-SNAPSHOT'
