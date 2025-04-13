@@ -1,18 +1,32 @@
-version: '3.8'
+version: '3.9'
 
 services:
-  postgres:
-    image: postgres:16
-    container_name: postgres-db
+  storeevent-db:
+    image: postgres:15
+    container_name: storeevent-db
     restart: always
     environment:
-      POSTGRES_USER: sys
-      POSTGRES_PASSWORD: sys
-      POSTGRES_DB: sys
+      POSTGRES_DB: storeEvent
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 1234
     ports:
       - "5432:5432"
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - storeevent_data:/var/lib/postgresql/data
+
+  query-db:
+    image: postgres:15
+    container_name: query-db
+    restart: always
+    environment:
+      POSTGRES_DB: query
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 1234
+    ports:
+      - "5433:5432"
+    volumes:
+      - query_data:/var/lib/postgresql/data
 
 volumes:
-  postgres-data:
+  storeevent_data:
+  query_data:

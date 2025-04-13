@@ -17,5 +17,5 @@ public interface EventBusClient {
     @Path("/customerCreated")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    CustomerCreated processCustomerCreatedEvent(CustomerCreated event);
+    CustomerCreated  processCustomerCreatedEvent(CustomerCreated event);
 }
