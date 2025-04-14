@@ -37,7 +37,7 @@ public class ReplayService {
                 String type = event.getType();
                 String payload = event.getPayload();
 
-                //change to switch if more than one entity type should be selectable/recoverable
+                //change to switch if more than one entity type should be recoverable
                 if (type.equals("CustomerCreated")) {
                     CustomerCreated customerCreated = objectMapper.readValue(payload, CustomerCreated.class);
                     queryClient.forwardCustomerCreatedEvent(customerCreated);
