@@ -1,6 +1,7 @@
 package fhv.eventbus.services;
 
 
+import at.fhv.sys.hotel.commands.shared.events.BookingCreated;
 import at.fhv.sys.hotel.commands.shared.events.CustomerCreated;
 import fhv.eventbus.client.QueryClient;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -22,6 +23,11 @@ public class EventProcessingService {
 
     public void processEvent(String stream, Object eventObject) {
         eventStoreService.storeEvent(stream, eventObject);
-        queryClient.forwardCustomerCreatedEvent((CustomerCreated) eventObject);
+
+        switch (eventObject) {
+            case CustomerCreated c -> queryClient.forwardCustomerCreatedEvent(c);
+            case BookingCreated b -> queryClient.forwardBookingCreatedEvent(b);
+            default -> System.out.println("Unknown event type: " + eventObject.getClass().getSimpleName());
+        }
     }
 }

@@ -1,5 +1,6 @@
 package fhv.eventbus.services;
 
+import at.fhv.sys.hotel.commands.shared.events.BookingCreated;
 import at.fhv.sys.hotel.commands.shared.events.CustomerCreated;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fhv.eventbus.client.QueryClient;
@@ -33,19 +34,23 @@ public class ReplayService {
 
         for (StoredEvent event : events) {
             try {
-
                 String type = event.getType();
                 String payload = event.getPayload();
 
-                //change to switch if more than one entity type should be recoverable
-                if (type.equals("CustomerCreated")) {
-                    CustomerCreated customerCreated = objectMapper.readValue(payload, CustomerCreated.class);
-                    queryClient.forwardCustomerCreatedEvent(customerCreated);
-                    LOG.info("Replayed: " + type + " -> " + customerCreated.getUserId());
-
-                } else {
-                    LOG.warn("Unknown event type: " + type);
+                switch (type) {
+                    case "CustomerCreated" -> {
+                        CustomerCreated customerCreated = objectMapper.readValue(payload, CustomerCreated.class);
+                        queryClient.forwardCustomerCreatedEvent(customerCreated);
+                        LOG.info("Replayed: " + type + " -> " + customerCreated.getUserId());
+                    }
+                    case "BookingCreated" -> {
+                        BookingCreated bookingCreated = objectMapper.readValue(payload, BookingCreated.class);
+                        queryClient.forwardBookingCreatedEvent(bookingCreated);
+                        LOG.info("Replayed: " + type + " -> " + bookingCreated.getBookingId());
+                    }
+                    default -> LOG.warn("Unknown event type: " + type);
                 }
+
             } catch (Exception e) {
                 LOG.error("Failed to replay event: " + event.getId(), e);
             }

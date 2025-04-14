@@ -1,9 +1,9 @@
 package fhv.controller;
 
-import at.fhv.sys.hotel.commands.shared.events.CustomerCreated;
 import fhv.commands.customer.CreateCustomerCommand;
 import fhv.commands.customer.CustomerAggregate;
 import fhv.dto.requestDTO.customer.CustomerRequestDTO;
+import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
@@ -14,11 +14,8 @@ import java.util.UUID;
 @Consumes(MediaType.APPLICATION_JSON)
 public class CustomerCommandController {
 
+    @Inject
     CustomerAggregate customerAggregate;
-
-    public CustomerCommandController(CustomerAggregate customerAggregate) {
-        this.customerAggregate = customerAggregate;
-    }
 
     @POST
     @Path("/createCustomer")

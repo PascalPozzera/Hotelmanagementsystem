@@ -1,5 +1,6 @@
 package fhv.eventbus.controller;
 
+import at.fhv.sys.hotel.commands.shared.events.BookingCreated;
 import at.fhv.sys.hotel.commands.shared.events.CustomerCreated;
 import fhv.eventbus.services.EventProcessingService;
 import jakarta.inject.Inject;
@@ -23,6 +24,14 @@ public class EventsController {
     public Response customerCreated(CustomerCreated event) {
         Logger.getAnonymousLogger().info("Received event: " + event);
         eventStoreService.processEvent("customer-" + event.getUserId(), event);
+        return Response.ok(event).build();
+    }
+
+    @POST
+    @Path("/bookingCreated")
+    public Response bookingCreated(BookingCreated event) {
+        Logger.getAnonymousLogger().info("Received event: " + event);
+        eventStoreService.processEvent("booking-" + event.getBookingId(), event);
         return Response.ok(event).build();
     }
 }
