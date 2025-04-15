@@ -16,6 +16,7 @@ public class BookingCreated {
     private String customerId;
     private LocalDate startDate;
     private LocalDate endDate;
+    private Boolean isPayed;
     private int numberOfGuests;
 
     public BookingCreated(
@@ -24,6 +25,7 @@ public class BookingCreated {
             String customerId,
             LocalDate startDate,
             LocalDate endDate,
+            boolean isPayed,
             int numberOfGuests) {
 
         this.bookingId = bookingId;
@@ -31,6 +33,7 @@ public class BookingCreated {
         this.customerId = customerId;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.isPayed = isPayed;
         this.numberOfGuests = numberOfGuests;
 
     }
@@ -43,6 +46,7 @@ public class BookingCreated {
                 ", customerId='" + customerId + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
+                ", isPayed=" + isPayed +
                 ", numberOfGuests=" + numberOfGuests +
                 '}';
     }

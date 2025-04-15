@@ -18,8 +18,9 @@ public class BookingCommandController {
     BookingAggregate bookingAggregate;
 
     @POST
-    @Path("/createBooking")
-    public String createBooking(@BeanParam BookingRequestDTO requestDTO) {
+    @Path("/bookRoom")
+    public String bookRoom(@BeanParam BookingRequestDTO requestDTO) {
+        // TBD: fix date
         String generatedId = UUID.randomUUID().toString();
         return bookingAggregate.handle(new CreateBookingCommand(
                 generatedId,
@@ -31,16 +32,16 @@ public class BookingCommandController {
     }
 
     @POST
-    @Path("/{bookingId}/update")
-    public String updateBooking(@PathParam("bookingId") String bookingId, @BeanParam BookingRequestDTO requestDTO) {
-        // TBD: process booking
-        return "Booking updated";
+    @Path("/{bookingId}/cancelBooking")
+    public String deleteBooking(@PathParam("bookingId") String bookingId) {
+        // TBD: cancel booking
+        return "Booking cancelled";
     }
 
     @POST
-    @Path("/{bookingId}/delete")
-    public String deleteBooking(@PathParam("bookingId") String bookingId) {
-        // TBD: delete booking
-        return "Booking deleted";
+    @Path("/{bookingId}/payBooking")
+    public String payBooking(@PathParam("bookingId") String bookingId) {
+        // TBD: pay booking
+        return "Booking payed";
     }
 }
