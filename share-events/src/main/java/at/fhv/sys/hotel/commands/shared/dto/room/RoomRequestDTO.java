@@ -32,4 +32,10 @@ public class RoomRequestDTO {
 
     @QueryParam("roomPrice")
     private double roomPrice;
+
+    @QueryParam("hasBalcony")
+    private boolean withBalcony;
+
+    @QueryParam("hasBalcony")
+    private String description;
 }

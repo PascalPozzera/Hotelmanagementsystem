@@ -16,7 +16,7 @@ public class BookingQueryModel {
     @Id
     private String bookingId;
 
-    private String roomNumber;
+    private int roomNumber;
     private String customerId;
     private LocalDate startDate;
     private LocalDate endDate;
@@ -24,7 +24,7 @@ public class BookingQueryModel {
 
     public BookingQueryModel() {}
 
-    public BookingQueryModel(String bookingId, String roomNumber, String customerId,
+    public BookingQueryModel(String bookingId, int roomNumber, String customerId,
                              LocalDate startDate, LocalDate endDate, int numberOfGuests) {
         this.bookingId = bookingId;
         this.roomNumber = roomNumber;

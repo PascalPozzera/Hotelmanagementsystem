@@ -19,15 +19,17 @@ public class RoomCommandController {
 
     @POST
     @Path("/createRoom")
-    public String createRoom(@BeanParam RoomRequestDTO requestDTO) {
-        // TBD: fix date
-        String generatedId = UUID.randomUUID().toString();
+    public UUID createRoom(@BeanParam RoomRequestDTO requestDTO) {
+        UUID generatedId = UUID.randomUUID();
         return roomAggregate.handle(new CreateRoomCommand(
                 generatedId,
                 requestDTO.getNumberOfPerson(),
                 requestDTO.getRoomNumber(),
                 requestDTO.getRoomPrice(),
-                requestDTO.getRoomType()));
+                requestDTO.getRoomType(),
+                requestDTO.isWithBalcony(),
+                requestDTO.getDescription()
+        ));
     }
 
     @POST

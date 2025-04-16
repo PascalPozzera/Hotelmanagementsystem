@@ -14,7 +14,7 @@ public class BookingRequestDTO {
     private String customerId;
 
     @QueryParam("roomNumber")
-    private String roomNumber;
+    private int roomNumber;
 
     @QueryParam("startDate")
     private LocalDate startDate;

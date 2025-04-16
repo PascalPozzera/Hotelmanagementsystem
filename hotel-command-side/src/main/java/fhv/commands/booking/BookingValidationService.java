@@ -29,8 +29,8 @@ public class BookingValidationService {
             errors.add("Booking ID must not be empty.");
         }
 
-        if (command.roomNumber() == null || command.roomNumber().isEmpty()) {
-            errors.add("Room number must not be empty.");
+        if (command.roomNumber() <= 0) {
+            errors.add("Room number must not be 0 or less.");
         }
 
         if (command.customerId() == null || command.customerId().isEmpty()) {
@@ -62,9 +62,9 @@ public class BookingValidationService {
         return errors;
     }
 
-    public boolean validateRoomToBookExists(String roomId) {
+    public boolean validateRoomToBookExists(int roomNumber) {
         try {
-            RoomResponseDTO room = roomQueryClient.doesRoomExist(roomId);
+            RoomResponseDTO room = roomQueryClient.doesRoomExist(roomNumber);
             return room != null;
         } catch (NotFoundException e) {
             return false;

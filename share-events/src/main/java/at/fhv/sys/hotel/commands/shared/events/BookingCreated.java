@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class BookingCreated {
 
     private String bookingId;
-    private String roomNumber;
+    private int roomNumber;
     private String customerId;
     private LocalDate startDate;
     private LocalDate endDate;
@@ -21,7 +21,7 @@ public class BookingCreated {
 
     public BookingCreated(
             String bookingId,
-            String roomNumber,
+            int roomNumber,
             String customerId,
             LocalDate startDate,
             LocalDate endDate,

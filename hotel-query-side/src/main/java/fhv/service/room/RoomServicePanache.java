@@ -3,10 +3,12 @@ package fhv.service.room;
 import fhv.models.room.RoomQueryPanacheModel;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
 import java.util.List;
 
+@Slf4j
 @ApplicationScoped
 public class RoomServicePanache {
 
@@ -16,8 +18,10 @@ public class RoomServicePanache {
 
     public List<RoomQueryPanacheModel> findAvailable(LocalDate startDate, LocalDate endDate) {
         return RoomQueryPanacheModel.find("FROM RoomQueryPanacheModel r WHERE r.roomId NOT IN (" +
-                "SELECT b.roomId FROM BookingQueryPanacheModel b " +
-                "WHERE b.startDate <= ?1 AND b.endDate >= ?2)", endDate, startDate)
+
+
+                        "SELECT b.roomId FROM BookingQueryPanacheModel b " +
+                        "WHERE b.startDate <= ?1 AND b.endDate >= ?2)", endDate, startDate)
                 .list();
     }
 
@@ -26,7 +30,7 @@ public class RoomServicePanache {
         room.persist();
     }
 
-    public RoomQueryPanacheModel getRoomById(String id) {
-        return RoomQueryPanacheModel.findById(id);
+    public RoomQueryPanacheModel getRoomByRoomNumber(int roomNumber) {
+        return RoomQueryPanacheModel.find("roomNumber = ?1", roomNumber).firstResult();
     }
 }

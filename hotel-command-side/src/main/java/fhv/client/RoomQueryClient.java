@@ -14,7 +14,7 @@ public interface RoomQueryClient {
     @GET
     @Path("/{roomNumber}/exists")
     @Consumes(MediaType.APPLICATION_JSON)
-    RoomResponseDTO doesRoomExist(@PathParam("roomNumber") String roomNumber);
+    RoomResponseDTO doesRoomExist(@PathParam("roomNumber") int roomNumber);
 
     @GET
     @Path("/validateDate")

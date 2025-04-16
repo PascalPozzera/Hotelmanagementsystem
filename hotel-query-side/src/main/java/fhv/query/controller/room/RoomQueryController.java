@@ -44,8 +44,8 @@ public class RoomQueryController {
 
     @GET
     @Path("/{roomNumber}/exists")
-    public RoomResponseDTO doesRoomExist(@PathParam("roomNumber") String roomNumber) {
-        return roomProjection.getRoomById(roomNumber);
+    public RoomResponseDTO doesRoomExist(@PathParam("roomNumber") int roomNumber) {
+        return roomProjection.getRoomByRoomNumber(roomNumber);
     }
 
     @GET

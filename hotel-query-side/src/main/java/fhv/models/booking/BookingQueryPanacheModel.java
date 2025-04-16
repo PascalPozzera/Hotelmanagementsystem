@@ -11,7 +11,7 @@ public class BookingQueryPanacheModel extends PanacheEntity {
 
     // Panache provides Auto-CRUD for everything
     public String bookingId;
-    public String roomNumber;
+    public int roomNumber;
     public String customerId;
     public LocalDate startDate;
     public LocalDate endDate;
@@ -20,7 +20,7 @@ public class BookingQueryPanacheModel extends PanacheEntity {
     public BookingQueryPanacheModel() {
     }
 
-    public BookingQueryPanacheModel(String bookingId, String roomNumber, String customerId, LocalDate startDate, LocalDate endDate, int numberOfGuests) {
+    public BookingQueryPanacheModel(String bookingId, int roomNumber, String customerId, LocalDate startDate, LocalDate endDate, int numberOfGuests) {
         this.bookingId = bookingId;
         this.roomNumber = roomNumber;
         this.customerId = customerId;

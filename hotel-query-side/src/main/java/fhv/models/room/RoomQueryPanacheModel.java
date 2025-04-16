@@ -9,28 +9,39 @@ import jakarta.persistence.Enumerated;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Entity
 @Getter
 @Setter
 public class RoomQueryPanacheModel extends PanacheEntity {
 
-    // Panache provides Auto-CRUD for everything
-    private String roomId;
+    private UUID roomId;
+
     private int numberOfPerson;
+
     private int roomNumber;
+
     private double roomPrice;
+
     @Enumerated(EnumType.STRING)
     private RoomType roomType;
+
+    private boolean withBalcony;
+
+    private String description;
 
     public RoomQueryPanacheModel() {
     }
 
-    public RoomQueryPanacheModel(String roomId, int numberOfPerson, int roomNumber, double roomPrice, RoomType roomType) {
+    public RoomQueryPanacheModel(UUID roomId, int numberOfPerson, int roomNumber, double roomPrice, RoomType roomType, boolean withBalcony, String description) {
         this.roomId = roomId;
         this.numberOfPerson = numberOfPerson;
         this.roomNumber = roomNumber;
         this.roomPrice = roomPrice;
         this.roomType = roomType;
+        this.withBalcony = withBalcony;
+        this.description = description;
     }
 
     public RoomResponseDTO toDTO() {
@@ -39,7 +50,9 @@ public class RoomQueryPanacheModel extends PanacheEntity {
                 this.numberOfPerson,
                 this.roomNumber,
                 this.roomPrice,
-                this.roomType
+                this.roomType,
+                this.withBalcony,
+                this.description
         );
     }
 

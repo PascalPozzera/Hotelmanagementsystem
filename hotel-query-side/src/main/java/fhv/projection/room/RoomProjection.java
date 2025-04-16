@@ -28,11 +28,11 @@ public class RoomProjection {
                 .toList();
     }
 
-    public RoomResponseDTO getRoomById(String id) {
-        return roomServicePanache.getRoomById(id).toDTO();
+    public RoomResponseDTO getRoomByRoomNumber(int roomNumber) {
+        return roomServicePanache.getRoomByRoomNumber(roomNumber).toDTO();
     }
 
-    public boolean isRoomAvailable(String roomNumber, LocalDate startDate, LocalDate endDate) {
+    public boolean isRoomAvailable(int roomNumber, LocalDate startDate, LocalDate endDate) {
         long count = BookingQueryPanacheModel.find(
                 "roomNumber = ?1 AND startDate <= ?2 AND endDate >= ?3",
                 roomNumber, endDate, startDate
@@ -53,7 +53,9 @@ public class RoomProjection {
                 roomCreatedEvent.getNumberOfPerson(),
                 roomCreatedEvent.getRoomNumber(),
                 roomCreatedEvent.getRoomPrice(),
-                roomCreatedEvent.getRoomType());
+                roomCreatedEvent.getRoomType(),
+                roomCreatedEvent.isWithBalcony(),
+                roomCreatedEvent.getDescription());
 
         roomServicePanache.createRoom(room);
     }
