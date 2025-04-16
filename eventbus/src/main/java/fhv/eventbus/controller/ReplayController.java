@@ -15,8 +15,7 @@ public class ReplayController {
     @POST
     @Path("/replayEvents")
     public Response replayAll() {
-        replayService.replayAllEvents();
-        return Response.ok("Replay done").build();
+        return replayService.replayAllEvents();
     }
 }
 

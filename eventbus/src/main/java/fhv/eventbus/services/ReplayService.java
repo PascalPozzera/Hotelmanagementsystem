@@ -9,6 +9,7 @@ import fhv.eventbus.repo.StoredEventRepo;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.jboss.logging.Logger;
 
@@ -26,10 +27,13 @@ public class ReplayService {
     @RestClient // -> weil @RegisterRestClient(configKey = "hotel-query-api-client") Markus ;) verwaltet diesen Client nicht als @Default Bean, sondern nur, wenn dieser mit @RestClient injected wird.
     QueryClient queryClient;
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper()
+            .registerModule(new com.fasterxml.jackson.datatype.jsr310.JavaTimeModule())
+            .disable(com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
     @Transactional
-    public void replayAllEvents() {
+    public Response replayAllEvents() {
+
         List<StoredEvent> events = repository.listAll();
 
         for (StoredEvent event : events) {
@@ -53,8 +57,10 @@ public class ReplayService {
 
             } catch (Exception e) {
                 LOG.error("Failed to replay event: " + event.getId(), e);
+                return Response.serverError().build();
             }
         }
+        return Response.ok().build();
     }
 }
 
