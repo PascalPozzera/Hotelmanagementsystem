@@ -16,7 +16,6 @@ public class CustomerCreated {
     public CustomerCreated() {}
 
     public CustomerCreated(String firstName, String lastName, String email) {
-
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
