@@ -4,6 +4,7 @@ import fhv.models.room.RoomQueryPanacheModel;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @ApplicationScoped
@@ -13,8 +14,19 @@ public class RoomServicePanache {
         return RoomQueryPanacheModel.listAll();
     }
 
+    public List<RoomQueryPanacheModel> findAvailable(LocalDate startDate, LocalDate endDate) {
+        return RoomQueryPanacheModel.find("FROM RoomQueryPanacheModel r WHERE r.roomId NOT IN (" +
+                "SELECT b.roomId FROM BookingQueryPanacheModel b " +
+                "WHERE b.startDate <= ?1 AND b.endDate >= ?2)", endDate, startDate)
+                .list();
+    }
+
     @Transactional
     public void createRoom(RoomQueryPanacheModel room) {
         room.persist();
+    }
+
+    public RoomQueryPanacheModel getRoomById(String id) {
+        return RoomQueryPanacheModel.findById(id);
     }
 }

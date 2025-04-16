@@ -10,6 +10,8 @@ import jakarta.transaction.Transactional;
 @ApplicationScoped
 public class RoomDataInitializer {
 
+    //Generate a set of rooms to initialize the database.
+
     @Transactional
     public void onStartup(@Observes StartupEvent event) {
         System.out.println("🚀 RoomDataInitializer wurde ausgeführt");

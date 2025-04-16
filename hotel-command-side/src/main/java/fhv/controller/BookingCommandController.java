@@ -20,7 +20,6 @@ public class BookingCommandController {
     @POST
     @Path("/bookRoom")
     public String bookRoom(@BeanParam BookingRequestDTO requestDTO) {
-        // TBD: fix date
         String generatedId = UUID.randomUUID().toString();
         return bookingAggregate.handle(new CreateBookingCommand(
                 generatedId,

@@ -6,8 +6,12 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 public class RoomQueryPanacheModel extends PanacheEntity {
 
     // Panache provides Auto-CRUD for everything

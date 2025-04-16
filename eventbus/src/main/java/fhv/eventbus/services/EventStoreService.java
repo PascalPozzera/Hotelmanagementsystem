@@ -1,6 +1,8 @@
 package fhv.eventbus.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import fhv.eventbus.entity.StoredEvent;
 import fhv.eventbus.repo.StoredEventRepo;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -13,7 +15,14 @@ public class EventStoreService {
     @Inject
     StoredEventRepo storedEventRepo;
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    //Is needed because of LocalDateTime
+    private final ObjectMapper objectMapper;
+
+    public EventStoreService() {
+        this.objectMapper = new ObjectMapper();
+        this.objectMapper.registerModule(new JavaTimeModule());
+        this.objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+    }
 
     @Transactional
     public void storeEvent(String stream, Object event) {

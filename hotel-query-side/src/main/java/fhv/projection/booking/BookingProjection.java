@@ -7,6 +7,7 @@ import fhv.service.booking.BookingServicePanache;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -23,6 +24,15 @@ public class BookingProjection {
         return bookings.stream()
                 .map(BookingQueryPanacheModel::toDTO)
                 .toList();
+    }
+
+    public static boolean isRoomAvailable(String roomId, LocalDate startDate, LocalDate endDate) {
+        long count = BookingQueryPanacheModel.find(
+                "roomId = ?1 AND startDate <= ?2 AND endDate >= ?3",
+                roomId, endDate, startDate
+        ).count();
+
+        return count == 0;
     }
 
     public void processBookingCreatedEvent(BookingCreated bookingCreatedEvent) {

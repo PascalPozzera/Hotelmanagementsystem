@@ -1,15 +1,28 @@
 package fhv.commands.booking;
 
+import at.fhv.sys.hotel.commands.shared.dto.booking.BookingAvailabilityResponseDTO;
+import at.fhv.sys.hotel.commands.shared.dto.booking.BookingRequestDTO;
+import at.fhv.sys.hotel.commands.shared.dto.room.RoomResponseDTO;
+import fhv.client.RoomQueryClient;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.NotFoundException;
+import lombok.extern.slf4j.Slf4j;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @ApplicationScoped
 public class BookingValidationService {
 
-    public List<String> validateCreateBooking(CreateBookingCommand command) {
+    @Inject
+    @RestClient
+    RoomQueryClient roomQueryClient;
+
+    public List<String> validateCreateBookingCommand(CreateBookingCommand command) {
         List<String> errors = new ArrayList<>();
 
         if (command.bookingId() == null || command.bookingId().isEmpty()) {
@@ -47,6 +60,36 @@ public class BookingValidationService {
         }
 
         return errors;
+    }
+
+    public boolean validateRoomToBookExists(String roomId) {
+        try {
+            RoomResponseDTO room = roomQueryClient.doesRoomExist(roomId);
+            return room != null;
+        } catch (NotFoundException e) {
+            return false;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            return false;
+        }
+    }
+
+    public boolean isRoomAvailable(CreateBookingCommand command) {
+        try {
+            BookingRequestDTO bookingRequestDTO = new BookingRequestDTO();
+            bookingRequestDTO.setRoomNumber(command.roomNumber());
+            bookingRequestDTO.setCustomerId(command.customerId());
+            bookingRequestDTO.setStartDate(command.startDate());
+            bookingRequestDTO.setEndDate(command.endDate());
+            bookingRequestDTO.setNumberOfGuests(command.numberOfGuests());
+
+            BookingAvailabilityResponseDTO response = roomQueryClient.isBookingDateValide(bookingRequestDTO);
+
+            return response != null && response.available();
+        } catch (Exception e) {
+            log.error("Error while checking room availability", e);
+            return false;
+        }
     }
 }
 

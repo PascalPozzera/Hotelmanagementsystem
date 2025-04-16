@@ -3,11 +3,13 @@ package fhv.projection.room;
 
 import at.fhv.sys.hotel.commands.shared.dto.room.RoomResponseDTO;
 import at.fhv.sys.hotel.commands.shared.events.RoomCreated;
+import fhv.models.booking.BookingQueryPanacheModel;
 import fhv.models.room.RoomQueryPanacheModel;
 import fhv.service.room.RoomServicePanache;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -24,6 +26,23 @@ public class RoomProjection {
         return rooms.stream()
                 .map(RoomQueryPanacheModel::toDTO)
                 .toList();
+    }
+
+    public RoomResponseDTO getRoomById(String id) {
+        return roomServicePanache.getRoomById(id).toDTO();
+    }
+
+    public boolean isRoomAvailable(String roomNumber, LocalDate startDate, LocalDate endDate) {
+        long count = BookingQueryPanacheModel.find(
+                "roomNumber = ?1 AND startDate <= ?2 AND endDate >= ?3",
+                roomNumber, endDate, startDate
+        ).count();
+
+        return count == 0;
+    }
+
+    public List<RoomResponseDTO> getAvailableRooms(LocalDate startDate, LocalDate endDate) {
+        return roomServicePanache.findAvailable(startDate, endDate).stream().map(RoomQueryPanacheModel::toDTO).toList();
     }
 
     public void processRoomCreatedEvent(RoomCreated roomCreatedEvent) {
