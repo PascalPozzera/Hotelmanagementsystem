@@ -26,16 +26,20 @@ public class BookingAggregate {
             throw new IllegalArgumentException("Booking validation failed: " + String.join("; ", errors));
         }
 
-        if(!bookingValidationService.validateEmail(command.email())){
-            throw new IllegalArgumentException("Email: " + command.email() + " does not exist.");
-        }
-
-        if(!bookingValidationService.validateRoomToBookExists(command.roomNumber())){
+        if (!bookingValidationService.validateRoomToBookExists(command.roomNumber())) {
             throw new IllegalArgumentException("Room with number : " + command.roomNumber() + " does not exist.");
         }
 
-        if(!bookingValidationService.isRoomAvailable(command)){
-            throw new IllegalArgumentException("Booking not allowed for room " + command.roomNumber());
+        if (!bookingValidationService.isRoomAvailable(command)) {
+            throw new IllegalArgumentException("Room " + command.roomNumber() + " cannot be booked as it is currently not available ");
+        }
+
+        if (!bookingValidationService.validateEmail(command.email())) {
+            throw new IllegalArgumentException("Email: " + command.email() + " does not exist.");
+        }
+
+        if (!bookingValidationService.validateGuestCountForRoom(command)) {
+            throw new IllegalArgumentException("The room " + command.roomNumber() + " does not have the required number of guests");
         }
 
         BookingCreated event = new BookingCreated(

@@ -2,6 +2,8 @@ package fhv.client;
 
 import at.fhv.sys.hotel.commands.shared.dto.booking.BookingAvailabilityResponseDTO;
 import at.fhv.sys.hotel.commands.shared.dto.booking.BookingRequestDTO;
+import at.fhv.sys.hotel.commands.shared.dto.customer.CustomerRequestDTO;
+import at.fhv.sys.hotel.commands.shared.dto.room.RoomRequestDTO;
 import at.fhv.sys.hotel.commands.shared.dto.room.RoomResponseDTO;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -21,4 +23,8 @@ public interface RoomQueryClient {
     @Consumes(MediaType.APPLICATION_JSON)
     BookingAvailabilityResponseDTO isBookingDateValide(@BeanParam BookingRequestDTO bookingRequestDTO);
 
+    @GET
+    @Path("/getRoom")
+    @Consumes(MediaType.APPLICATION_JSON)
+    RoomResponseDTO getRoom(@BeanParam RoomRequestDTO roomRequestDTO);
 }

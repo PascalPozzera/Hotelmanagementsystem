@@ -2,6 +2,7 @@ package fhv.query.controller.room;
 
 import at.fhv.sys.hotel.commands.shared.dto.booking.BookingAvailabilityResponseDTO;
 import at.fhv.sys.hotel.commands.shared.dto.booking.BookingRequestDTO;
+import at.fhv.sys.hotel.commands.shared.dto.room.RoomRequestDTO;
 import at.fhv.sys.hotel.commands.shared.dto.room.RoomResponseDTO;
 import at.fhv.sys.hotel.commands.shared.events.RoomCreated;
 import fhv.projection.room.RoomProjection;
@@ -46,6 +47,12 @@ public class RoomQueryController {
     @Path("/{roomNumber}/exists")
     public RoomResponseDTO doesRoomExist(@PathParam("roomNumber") int roomNumber) {
         return roomProjection.getRoomByRoomNumber(roomNumber);
+    }
+
+    @GET
+    @Path("/getRoom")
+    public RoomResponseDTO getRoom(@BeanParam RoomRequestDTO request) {
+        return roomProjection.getRoomByRoomNumber(request.getRoomNumber());
     }
 
     @GET

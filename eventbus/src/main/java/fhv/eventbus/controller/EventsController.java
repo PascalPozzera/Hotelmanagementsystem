@@ -26,7 +26,7 @@ public class EventsController {
     @Path("/customerCreated")
     public Response customerCreated(CustomerCreated event) {
         Logger.getAnonymousLogger().info("Received event: " + event);
-        eventStoreService.processEvent("customer-email" + event.getEmail(), event);
+        eventStoreService.processEvent("customer-email: " + event.getEmail(), event);
         return Response.ok(event).build();
     }
 

@@ -3,9 +3,11 @@ package fhv.commands.booking;
 import at.fhv.sys.hotel.commands.shared.dto.booking.BookingAvailabilityResponseDTO;
 import at.fhv.sys.hotel.commands.shared.dto.booking.BookingRequestDTO;
 import at.fhv.sys.hotel.commands.shared.dto.customer.CustomerRequestDTO;
+import at.fhv.sys.hotel.commands.shared.dto.room.RoomRequestDTO;
 import at.fhv.sys.hotel.commands.shared.dto.room.RoomResponseDTO;
 import fhv.client.CustomerQueryClient;
 import fhv.client.RoomQueryClient;
+import fhv.commands.room.CreateRoomCommand;
 import io.quarkus.logging.Log;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -106,6 +108,21 @@ public class BookingValidationService {
 
         } catch (Exception e) {
             Log.error("Error while checking email exists", e);
+            return false;
+        }
+    }
+
+    public boolean validateGuestCountForRoom(CreateBookingCommand command) {
+        try {
+            RoomRequestDTO roomRequestDTO = new RoomRequestDTO();
+            roomRequestDTO.setRoomNumber(command.roomNumber());
+
+            RoomResponseDTO response = roomQueryClient.getRoom(roomRequestDTO);
+
+            return command.numberOfGuests() <= response.numberOfPerson();
+
+        } catch (Exception e) {
+            Log.error("Error while checking guest count", e);
             return false;
         }
     }
