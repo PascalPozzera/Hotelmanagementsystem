@@ -4,6 +4,8 @@ import at.fhv.sys.hotel.commands.shared.dto.room.RoomResponseDTO;
 import at.fhv.sys.hotel.commands.shared.enums.RoomType;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
 @Entity
 public class RoomQueryPanacheModel extends PanacheEntity {
@@ -13,6 +15,7 @@ public class RoomQueryPanacheModel extends PanacheEntity {
     private int numberOfPerson;
     private int roomNumber;
     private double roomPrice;
+    @Enumerated(EnumType.STRING)
     private RoomType roomType;
 
     public RoomQueryPanacheModel() {
