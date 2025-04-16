@@ -33,7 +33,7 @@ public class BookingCommandController {
 
     @POST
     @Path("/{bookingId}/cancelBooking")
-    public String deleteBooking(@PathParam("bookingId") String bookingId) {
+    public String cancelBooking(@PathParam("bookingId") String bookingId) {
         // TBD: cancel booking
         return "Booking cancelled";
     }
