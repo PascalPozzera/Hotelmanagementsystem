@@ -20,7 +20,7 @@ public class BookingCommandController {
     public String bookRoom(@BeanParam BookingRequestDTO requestDTO) {
         return bookingAggregate.handle(new CreateBookingCommand(
                 requestDTO.getRoomNumber(),
-                requestDTO.getCustomerId(),
+                requestDTO.getEmail(),
                 requestDTO.getStartDate(),
                 requestDTO.getEndDate(),
                 requestDTO.getNumberOfGuests()));

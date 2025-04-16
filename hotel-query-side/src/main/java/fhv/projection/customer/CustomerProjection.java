@@ -1,5 +1,6 @@
 package fhv.projection.customer;
 
+import at.fhv.sys.hotel.commands.shared.dto.customer.CustomerRequestDTO;
 import at.fhv.sys.hotel.commands.shared.dto.customer.CustomerResponseDTO;
 import at.fhv.sys.hotel.commands.shared.events.CustomerCreated;
 import fhv.models.customer.CustomerQueryPanacheModel;
@@ -23,6 +24,10 @@ public class CustomerProjection {
         return bookings.stream()
                 .map(CustomerQueryPanacheModel::toDTO)
                 .toList();
+    }
+
+    public CustomerResponseDTO getCustomerByEmail(CustomerRequestDTO customerRequestDTO) {
+        return customerServicePanache.getCustomerByEmail(customerRequestDTO.getEmail()).toDTO();
     }
 
     public void processCustomerCreatedEvent(CustomerCreated customerCreatedEvent) {

@@ -59,7 +59,6 @@ public class RoomQueryController {
         return new BookingAvailabilityResponseDTO(available);
     }
 
-
     @POST
     @Operation(hidden = true) //The POST method is hidden to prevent it from being visible to the user in Swagger.
     @Path("/roomCreated")

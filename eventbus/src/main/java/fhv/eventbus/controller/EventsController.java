@@ -24,7 +24,7 @@ public class EventsController {
     @Path("/customerCreated")
     public Response customerCreated(CustomerCreated event) {
         Logger.getAnonymousLogger().info("Received event: " + event);
-        eventStoreService.processEvent("customer-" + event.getUserId(), event);
+        eventStoreService.processEvent("customer-email" + event.getEmail(), event);
         return Response.ok(event).build();
     }
 
@@ -32,7 +32,7 @@ public class EventsController {
     @Path("/bookingCreated")
     public Response bookingCreated(BookingCreated event) {
         Logger.getAnonymousLogger().info("Received event: " + event);
-        eventStoreService.processEvent("booking-" + event.getBookingId(), event);
+        eventStoreService.processEvent("booking-RoomNumber: " + event.getRoomNumber(), event);
         return Response.ok(event).build();
     }
 

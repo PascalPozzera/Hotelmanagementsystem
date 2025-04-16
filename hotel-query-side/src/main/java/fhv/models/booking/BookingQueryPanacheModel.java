@@ -5,13 +5,12 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Entity
 public class BookingQueryPanacheModel extends PanacheEntity {
 
     public int roomNumber;
-    public long customerId;
+    public String email;
     public LocalDate startDate;
     public LocalDate endDate;
     public int numberOfGuests;
@@ -19,10 +18,10 @@ public class BookingQueryPanacheModel extends PanacheEntity {
     public BookingQueryPanacheModel() {
     }
 
-    public BookingQueryPanacheModel(int roomNumber, long customerId, LocalDate startDate, LocalDate endDate, int numberOfGuests) {
+    public BookingQueryPanacheModel(int roomNumber, String email, LocalDate startDate, LocalDate endDate, int numberOfGuests) {
 
         this.roomNumber = roomNumber;
-        this.customerId = customerId;
+        this.email = email;
         this.startDate = startDate;
         this.endDate = endDate;
         this.numberOfGuests = numberOfGuests;
@@ -31,7 +30,7 @@ public class BookingQueryPanacheModel extends PanacheEntity {
     public BookingResponseDTO toDTO() {
         return new BookingResponseDTO(
                 this.roomNumber,
-                this.customerId,
+                this.email,
                 this.startDate,
                 this.endDate,
                 this.numberOfGuests
@@ -42,7 +41,7 @@ public class BookingQueryPanacheModel extends PanacheEntity {
     public String toString() {
         return "BookingQueryPanacheModel{" +
                 ", roomNumber='" + roomNumber + '\'' +
-                ", customerId='" + customerId + '\'' +
+                ", customerId='" + email + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", numberOfGuests=" + numberOfGuests +

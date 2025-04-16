@@ -14,6 +14,10 @@ public class CustomerServicePanache {
         return CustomerQueryPanacheModel.listAll();
     }
 
+    public CustomerQueryPanacheModel getCustomerByEmail(String email) {
+        return CustomerQueryPanacheModel.find("email", email).firstResult();
+    }
+
     @Transactional
     public void createCustomer(CustomerQueryPanacheModel customer) {
         customer.persist();

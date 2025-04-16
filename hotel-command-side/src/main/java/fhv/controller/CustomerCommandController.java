@@ -20,8 +20,7 @@ public class CustomerCommandController {
     @POST
     @Path("/createCustomer")
     public String createCustomer(@BeanParam CustomerRequestDTO requestDTO) {
-        String generatedId = UUID.randomUUID().toString();
-        return customerAggregate.handle(new CreateCustomerCommand(generatedId, requestDTO.getFirstName(), requestDTO.getLastname(), requestDTO.getEmail()));
+        return customerAggregate.handle(new CreateCustomerCommand(requestDTO.getFirstName(), requestDTO.getLastname(), requestDTO.getEmail()));
     }
 
     @POST

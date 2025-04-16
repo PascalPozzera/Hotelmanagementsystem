@@ -26,6 +26,10 @@ public class BookingAggregate {
             throw new IllegalArgumentException("Booking validation failed: " + String.join("; ", errors));
         }
 
+        if(!bookingValidationService.validateEmail(command.email())){
+            throw new IllegalArgumentException("Email: " + command.email() + " does not exist.");
+        }
+
         if(!bookingValidationService.validateRoomToBookExists(command.roomNumber())){
             throw new IllegalArgumentException("Room with number : " + command.roomNumber() + " does not exist.");
         }
@@ -36,7 +40,7 @@ public class BookingAggregate {
 
         BookingCreated event = new BookingCreated(
                 command.roomNumber(),
-                command.customerId(),
+                command.email(),
                 command.startDate(),
                 command.endDate(),
                 false,

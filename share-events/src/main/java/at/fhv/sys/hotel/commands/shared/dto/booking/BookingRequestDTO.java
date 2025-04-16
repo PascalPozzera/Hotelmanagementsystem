@@ -10,8 +10,8 @@ import java.time.LocalDate;
 @Setter
 public class BookingRequestDTO {
 
-    @QueryParam("customerId")
-    private long customerId;
+    @QueryParam("customerEmail")
+    private String email;
 
     @QueryParam("roomNumber")
     private int roomNumber;

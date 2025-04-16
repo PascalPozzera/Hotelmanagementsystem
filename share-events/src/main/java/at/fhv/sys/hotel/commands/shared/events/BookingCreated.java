@@ -12,9 +12,8 @@ import java.util.UUID;
 @NoArgsConstructor
 public class BookingCreated {
 
-    private UUID bookingId;
     private int roomNumber;
-    private long customerId;
+    private String email;
     private LocalDate startDate;
     private LocalDate endDate;
     private Boolean isPayed;
@@ -22,13 +21,13 @@ public class BookingCreated {
 
     public BookingCreated(
             int roomNumber,
-            long customerId,
+            String email,
             LocalDate startDate,
             LocalDate endDate,
             boolean isPayed,
             int numberOfGuests) {
         this.roomNumber = roomNumber;
-        this.customerId = customerId;
+        this.email = email;
         this.startDate = startDate;
         this.endDate = endDate;
         this.isPayed = isPayed;
@@ -40,7 +39,6 @@ public class BookingCreated {
     public String toString() {
         return "BookingCreated{" +
                 ", roomNumber='" + roomNumber + '\'' +
-                ", customerId='" + customerId + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", isPayed=" + isPayed +

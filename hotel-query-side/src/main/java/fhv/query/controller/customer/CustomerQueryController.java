@@ -1,5 +1,6 @@
 package fhv.query.controller.customer;
 
+import at.fhv.sys.hotel.commands.shared.dto.customer.CustomerRequestDTO;
 import at.fhv.sys.hotel.commands.shared.dto.customer.CustomerResponseDTO;
 import at.fhv.sys.hotel.commands.shared.events.CustomerCreated;
 import fhv.projection.customer.CustomerProjection;
@@ -25,6 +26,13 @@ public class CustomerQueryController {
     public Response getCustomers() {
         List<CustomerResponseDTO> customers = customerProjection.getAllCustomers();
         return Response.ok(customers).build();
+    }
+
+    @GET
+    @Path("/emailExists")
+    public Response checkEmailExist(@BeanParam CustomerRequestDTO customerRequestDTO) {
+        CustomerResponseDTO customer = customerProjection.getCustomerByEmail(customerRequestDTO);
+        return Response.ok(customer).build();
     }
 
     @POST

@@ -41,7 +41,7 @@ public class BookingProjection {
 
         BookingQueryPanacheModel panacheModel = new BookingQueryPanacheModel(
                 bookingCreatedEvent.getRoomNumber(),
-                bookingCreatedEvent.getCustomerId(),
+                bookingCreatedEvent.getEmail(),
                 bookingCreatedEvent.getStartDate(),
                 bookingCreatedEvent.getEndDate(),
                 bookingCreatedEvent.getNumberOfGuests()

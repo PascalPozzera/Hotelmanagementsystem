@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 public record CreateBookingCommand(
         int roomNumber,
-        long customerId,
+        String email,
         LocalDate startDate,
         LocalDate endDate,
         int numberOfGuests

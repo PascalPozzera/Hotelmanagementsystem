@@ -2,8 +2,11 @@ package fhv.commands.booking;
 
 import at.fhv.sys.hotel.commands.shared.dto.booking.BookingAvailabilityResponseDTO;
 import at.fhv.sys.hotel.commands.shared.dto.booking.BookingRequestDTO;
+import at.fhv.sys.hotel.commands.shared.dto.customer.CustomerRequestDTO;
 import at.fhv.sys.hotel.commands.shared.dto.room.RoomResponseDTO;
+import fhv.client.CustomerQueryClient;
 import fhv.client.RoomQueryClient;
+import io.quarkus.logging.Log;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.NotFoundException;
@@ -22,6 +25,10 @@ public class BookingValidationService {
     @RestClient
     RoomQueryClient roomQueryClient;
 
+    @Inject
+    @RestClient
+    CustomerQueryClient customerQueryClient;
+
     public List<String> validateCreateBookingCommand(CreateBookingCommand command) {
         List<String> errors = new ArrayList<>();
 
@@ -29,8 +36,8 @@ public class BookingValidationService {
             errors.add("Room number must not be 0 or less.");
         }
 
-        if (command.customerId() <= 0) {
-            errors.add("Customer ID must not be 0 or less.");
+        if (command.email() == null || command.email().isEmpty()) {
+            errors.add("Customer Email must not be empty or null.");
         }
 
         if (command.startDate() == null) {
@@ -65,7 +72,7 @@ public class BookingValidationService {
         } catch (NotFoundException e) {
             return false;
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            Log.error(e.getMessage(), e);
             return false;
         }
     }
@@ -74,7 +81,7 @@ public class BookingValidationService {
         try {
             BookingRequestDTO bookingRequestDTO = new BookingRequestDTO();
             bookingRequestDTO.setRoomNumber(command.roomNumber());
-            bookingRequestDTO.setCustomerId(command.customerId());
+            bookingRequestDTO.setEmail(command.email());
             bookingRequestDTO.setStartDate(command.startDate());
             bookingRequestDTO.setEndDate(command.endDate());
             bookingRequestDTO.setNumberOfGuests(command.numberOfGuests());
@@ -83,7 +90,22 @@ public class BookingValidationService {
 
             return response != null && response.available();
         } catch (Exception e) {
-            log.error("Error while checking room availability", e);
+            Log.error("Error while checking room availability", e);
+            return false;
+        }
+    }
+
+    public boolean validateEmail(String email) {
+        try {
+            CustomerRequestDTO customerRequestDTO = new CustomerRequestDTO();
+            customerRequestDTO.setEmail(email);
+
+            CustomerRequestDTO response = customerQueryClient.doesEmailExist(customerRequestDTO);
+
+            return response != null;
+
+        } catch (Exception e) {
+            Log.error("Error while checking email exists", e);
             return false;
         }
     }

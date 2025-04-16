@@ -41,12 +41,12 @@ public class ReplayService {
                     case "CustomerCreated" -> {
                         CustomerCreated customerCreated = objectMapper.readValue(payload, CustomerCreated.class);
                         queryClient.forwardCustomerCreatedEvent(customerCreated);
-                        LOG.info("Replayed: " + type + " -> " + customerCreated.getUserId());
+                        LOG.info("Replayed: " + type + " -> " + customerCreated.getEmail());
                     }
                     case "BookingCreated" -> {
                         BookingCreated bookingCreated = objectMapper.readValue(payload, BookingCreated.class);
                         queryClient.forwardBookingCreatedEvent(bookingCreated);
-                        LOG.info("Replayed: " + type + " -> " + bookingCreated.getBookingId());
+                        LOG.info("Replayed: " + type + " -> " + bookingCreated.getEmail());
                     }
                     default -> LOG.warn("Unknown event type: " + type);
                 }
