@@ -35,7 +35,6 @@ public class BookingAggregate {
         }
 
         BookingCreated event = new BookingCreated(
-                command.bookingId(),
                 command.roomNumber(),
                 command.customerId(),
                 command.startDate(),

@@ -29,7 +29,6 @@ public class CustomerProjection {
         Logger.getAnonymousLogger().info("Processing event: " + customerCreatedEvent);
 
         CustomerQueryPanacheModel customer = new CustomerQueryPanacheModel(
-                customerCreatedEvent.getUserId(),
                 customerCreatedEvent.getFirstName(),
                 customerCreatedEvent.getLastName(),
                 customerCreatedEvent.getEmail());

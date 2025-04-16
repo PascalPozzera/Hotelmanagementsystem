@@ -8,8 +8,7 @@ import jakarta.persistence.Entity;
 @Entity
 public class CustomerQueryPanacheModel extends PanacheEntity {
 
-    // Panache provides Auto-CRUD for everything
-    public String userId;
+    //No id as attribute, because PanacheEntity will create by default one
     public String firstName;
     public String lastName;
     public String email;
@@ -17,8 +16,7 @@ public class CustomerQueryPanacheModel extends PanacheEntity {
     public CustomerQueryPanacheModel() {
     }
 
-    public CustomerQueryPanacheModel(String userId, String firstName, String lastName, String email) {
-        this.userId = userId;
+    public CustomerQueryPanacheModel(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -26,7 +24,6 @@ public class CustomerQueryPanacheModel extends PanacheEntity {
 
     public CustomerResponseDTO toDTO() {
         return new CustomerResponseDTO(
-                this.userId,
                 this.firstName,
                 this.lastName,
                 this.email);
@@ -35,7 +32,6 @@ public class CustomerQueryPanacheModel extends PanacheEntity {
     @Override
     public String toString() {
         return "CustomerQueryPanacheModel{" +
-                "userId='" + userId + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +

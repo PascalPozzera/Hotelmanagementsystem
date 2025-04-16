@@ -5,14 +5,13 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
 public class BookingQueryPanacheModel extends PanacheEntity {
 
-    // Panache provides Auto-CRUD for everything
-    public String bookingId;
     public int roomNumber;
-    public String customerId;
+    public long customerId;
     public LocalDate startDate;
     public LocalDate endDate;
     public int numberOfGuests;
@@ -20,8 +19,8 @@ public class BookingQueryPanacheModel extends PanacheEntity {
     public BookingQueryPanacheModel() {
     }
 
-    public BookingQueryPanacheModel(String bookingId, int roomNumber, String customerId, LocalDate startDate, LocalDate endDate, int numberOfGuests) {
-        this.bookingId = bookingId;
+    public BookingQueryPanacheModel(int roomNumber, long customerId, LocalDate startDate, LocalDate endDate, int numberOfGuests) {
+
         this.roomNumber = roomNumber;
         this.customerId = customerId;
         this.startDate = startDate;
@@ -31,7 +30,6 @@ public class BookingQueryPanacheModel extends PanacheEntity {
 
     public BookingResponseDTO toDTO() {
         return new BookingResponseDTO(
-                this.bookingId,
                 this.roomNumber,
                 this.customerId,
                 this.startDate,
@@ -43,7 +41,6 @@ public class BookingQueryPanacheModel extends PanacheEntity {
     @Override
     public String toString() {
         return "BookingQueryPanacheModel{" +
-                "bookingId='" + bookingId + '\'' +
                 ", roomNumber='" + roomNumber + '\'' +
                 ", customerId='" + customerId + '\'' +
                 ", startDate=" + startDate +

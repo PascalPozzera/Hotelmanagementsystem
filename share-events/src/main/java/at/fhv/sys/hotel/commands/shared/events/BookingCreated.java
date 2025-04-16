@@ -5,30 +5,28 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
 public class BookingCreated {
 
-    private String bookingId;
+    private UUID bookingId;
     private int roomNumber;
-    private String customerId;
+    private long customerId;
     private LocalDate startDate;
     private LocalDate endDate;
     private Boolean isPayed;
     private int numberOfGuests;
 
     public BookingCreated(
-            String bookingId,
             int roomNumber,
-            String customerId,
+            long customerId,
             LocalDate startDate,
             LocalDate endDate,
             boolean isPayed,
             int numberOfGuests) {
-
-        this.bookingId = bookingId;
         this.roomNumber = roomNumber;
         this.customerId = customerId;
         this.startDate = startDate;
@@ -41,7 +39,6 @@ public class BookingCreated {
     @Override
     public String toString() {
         return "BookingCreated{" +
-                "bookingId='" + bookingId + '\'' +
                 ", roomNumber='" + roomNumber + '\'' +
                 ", customerId='" + customerId + '\'' +
                 ", startDate=" + startDate +

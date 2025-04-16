@@ -1,13 +1,11 @@
 package fhv.controller;
 
+import at.fhv.sys.hotel.commands.shared.dto.booking.BookingRequestDTO;
 import fhv.commands.booking.BookingAggregate;
 import fhv.commands.booking.CreateBookingCommand;
-import at.fhv.sys.hotel.commands.shared.dto.booking.BookingRequestDTO;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-
-import java.util.UUID;
 
 @Path("/api")
 @Produces(MediaType.APPLICATION_JSON)
@@ -20,9 +18,7 @@ public class BookingCommandController {
     @POST
     @Path("/bookRoom")
     public String bookRoom(@BeanParam BookingRequestDTO requestDTO) {
-        String generatedId = UUID.randomUUID().toString();
         return bookingAggregate.handle(new CreateBookingCommand(
-                generatedId,
                 requestDTO.getRoomNumber(),
                 requestDTO.getCustomerId(),
                 requestDTO.getStartDate(),

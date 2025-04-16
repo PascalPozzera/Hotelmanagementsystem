@@ -40,7 +40,6 @@ public class BookingProjection {
         Logger.getAnonymousLogger().info("Processing event: " + bookingCreatedEvent);
 
         BookingQueryPanacheModel panacheModel = new BookingQueryPanacheModel(
-                bookingCreatedEvent.getBookingId(),
                 bookingCreatedEvent.getRoomNumber(),
                 bookingCreatedEvent.getCustomerId(),
                 bookingCreatedEvent.getStartDate(),

@@ -25,16 +25,12 @@ public class BookingValidationService {
     public List<String> validateCreateBookingCommand(CreateBookingCommand command) {
         List<String> errors = new ArrayList<>();
 
-        if (command.bookingId() == null || command.bookingId().isEmpty()) {
-            errors.add("Booking ID must not be empty.");
-        }
-
         if (command.roomNumber() <= 0) {
             errors.add("Room number must not be 0 or less.");
         }
 
-        if (command.customerId() == null || command.customerId().isEmpty()) {
-            errors.add("Customer ID must not be empty.");
+        if (command.customerId() <= 0) {
+            errors.add("Customer ID must not be 0 or less.");
         }
 
         if (command.startDate() == null) {

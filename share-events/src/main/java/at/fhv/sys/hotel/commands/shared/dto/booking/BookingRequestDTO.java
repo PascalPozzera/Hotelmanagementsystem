@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class BookingRequestDTO {
 
     @QueryParam("customerId")
-    private String customerId;
+    private long customerId;
 
     @QueryParam("roomNumber")
     private int roomNumber;
