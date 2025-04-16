@@ -2,7 +2,7 @@ package fhv.controller;
 
 import fhv.commands.booking.BookingAggregate;
 import fhv.commands.booking.CreateBookingCommand;
-import fhv.dto.requestDTO.booking.BookingRequestDTO;
+import at.fhv.sys.hotel.commands.shared.dto.booking.BookingRequestDTO;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;

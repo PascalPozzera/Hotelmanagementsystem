@@ -1,6 +1,6 @@
 package fhv.models.booking;
 
-import at.fhv.sys.hotel.commands.shared.dto.BookingResponseDTO;
+import at.fhv.sys.hotel.commands.shared.dto.booking.BookingResponseDTO;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
 
@@ -8,7 +8,6 @@ import java.time.LocalDate;
 
 @Entity
 public class BookingQueryPanacheModel extends PanacheEntity {
-
 
     // Panache provides Auto-CRUD for everything
     public String bookingId;

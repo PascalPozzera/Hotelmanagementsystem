@@ -1,6 +1,6 @@
 package fhv.query.controller.customer;
 
-import at.fhv.sys.hotel.commands.shared.dto.CustomerResponseDTO;
+import at.fhv.sys.hotel.commands.shared.dto.customer.CustomerResponseDTO;
 import at.fhv.sys.hotel.commands.shared.events.CustomerCreated;
 import fhv.projection.customer.CustomerProjection;
 import jakarta.inject.Inject;

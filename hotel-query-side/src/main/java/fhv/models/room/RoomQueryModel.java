@@ -1,5 +1,6 @@
 package fhv.models.room;
 
+import at.fhv.sys.hotel.commands.shared.enums.RoomType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Getter;
@@ -32,3 +33,4 @@ public class RoomQueryModel {
     }
 }
 
+//Remove Class??

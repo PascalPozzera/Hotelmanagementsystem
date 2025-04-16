@@ -1,5 +1,6 @@
 package at.fhv.sys.hotel.commands.shared.events;
 
+import at.fhv.sys.hotel.commands.shared.enums.RoomType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,12 +13,12 @@ public class RoomCreated {
     private int numberOfPerson;
     private int roomNumber;
     private double roomPrice;
-    private String roomType;
+    private RoomType roomType;
 
     public RoomCreated() {
     }
 
-    public RoomCreated(String roomId, int numberOfPerson, int roomNumber, double roomPrice, String roomType) {
+    public RoomCreated(String roomId, int numberOfPerson, int roomNumber, double roomPrice, RoomType roomType) {
         this.roomId = roomId;
         this.numberOfPerson = numberOfPerson;
         this.roomNumber = roomNumber;
@@ -32,7 +33,7 @@ public class RoomCreated {
                 ", numberOfPerson=" + numberOfPerson +
                 ", roomNumber=" + roomNumber +
                 ", roomPrice=" + roomPrice +
-                ", roomType='" + roomType + '\'' +
+                ", roomType='" + roomType.toString() + '\'' +
                 '}';
     }
 }

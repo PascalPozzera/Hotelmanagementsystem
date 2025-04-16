@@ -1,6 +1,6 @@
 package fhv.projection.booking;
 
-import at.fhv.sys.hotel.commands.shared.dto.BookingResponseDTO;
+import at.fhv.sys.hotel.commands.shared.dto.booking.BookingResponseDTO;
 import at.fhv.sys.hotel.commands.shared.events.BookingCreated;
 import fhv.models.booking.BookingQueryPanacheModel;
 import fhv.service.booking.BookingServicePanache;

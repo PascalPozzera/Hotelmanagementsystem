@@ -1,6 +1,6 @@
 package fhv.projection.customer;
 
-import at.fhv.sys.hotel.commands.shared.dto.CustomerResponseDTO;
+import at.fhv.sys.hotel.commands.shared.dto.customer.CustomerResponseDTO;
 import at.fhv.sys.hotel.commands.shared.events.CustomerCreated;
 import fhv.models.customer.CustomerQueryPanacheModel;
 import fhv.service.customer.CustomerServicePanache;

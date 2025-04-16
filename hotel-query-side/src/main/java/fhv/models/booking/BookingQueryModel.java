@@ -1,6 +1,6 @@
 package fhv.models.booking;
 
-import at.fhv.sys.hotel.commands.shared.dto.BookingResponseDTO;
+import at.fhv.sys.hotel.commands.shared.dto.booking.BookingResponseDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Getter;
@@ -58,3 +58,4 @@ public class BookingQueryModel {
     }
 }
 
+//Remove Class??

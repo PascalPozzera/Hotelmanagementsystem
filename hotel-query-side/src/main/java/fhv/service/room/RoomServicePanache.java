@@ -1,7 +1,5 @@
 package fhv.service.room;
 
-
-import fhv.models.customer.CustomerQueryPanacheModel;
 import fhv.models.room.RoomQueryPanacheModel;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;

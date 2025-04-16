@@ -1,6 +1,6 @@
 package fhv.query.controller.room;
 
-import at.fhv.sys.hotel.commands.shared.dto.RoomResponseDTO;
+import at.fhv.sys.hotel.commands.shared.dto.room.RoomResponseDTO;
 import at.fhv.sys.hotel.commands.shared.events.RoomCreated;
 import fhv.projection.room.RoomProjection;
 import jakarta.inject.Inject;
@@ -21,7 +21,7 @@ public class RoomQueryController {
     RoomProjection roomProjection;
 
     @GET
-    @Path("/getRooms")
+    @Path("/getFreeRooms")
     public Response getRooms() {
         List<RoomResponseDTO> rooms = roomProjection.getAllRooms();
         return Response.ok(rooms).build();

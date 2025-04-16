@@ -2,7 +2,7 @@ package fhv.controller;
 
 import fhv.commands.customer.CreateCustomerCommand;
 import fhv.commands.customer.CustomerAggregate;
-import fhv.dto.requestDTO.customer.CustomerRequestDTO;
+import at.fhv.sys.hotel.commands.shared.dto.customer.CustomerRequestDTO;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;

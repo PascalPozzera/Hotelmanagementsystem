@@ -1,8 +1,8 @@
 package fhv.projection.room;
 
-import at.fhv.sys.hotel.commands.shared.dto.RoomResponseDTO;
+
+import at.fhv.sys.hotel.commands.shared.dto.room.RoomResponseDTO;
 import at.fhv.sys.hotel.commands.shared.events.RoomCreated;
-import fhv.models.customer.CustomerQueryPanacheModel;
 import fhv.models.room.RoomQueryPanacheModel;
 import fhv.service.room.RoomServicePanache;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -27,7 +27,7 @@ public class RoomProjection {
     }
 
     public void processRoomCreatedEvent(RoomCreated roomCreatedEvent) {
-        Logger.getAnonymousLogger().info("Processing event: " + roomCreatedEvent );
+        Logger.getAnonymousLogger().info("Processing event: " + roomCreatedEvent);
 
         RoomQueryPanacheModel room = new RoomQueryPanacheModel(
                 roomCreatedEvent.getRoomId(),
@@ -35,7 +35,6 @@ public class RoomProjection {
                 roomCreatedEvent.getRoomNumber(),
                 roomCreatedEvent.getRoomPrice(),
                 roomCreatedEvent.getRoomType());
-
 
         roomServicePanache.createRoom(room);
     }

@@ -1,8 +1,12 @@
-package fhv.dto.requestDTO.customer;
+package at.fhv.sys.hotel.commands.shared.dto.customer;
 
 import jakarta.ws.rs.QueryParam;
+import lombok.Getter;
+import lombok.Setter;
 
-public class UpdateCustomerRequestDTO {
+@Getter
+@Setter
+public class CustomerRequestDTO {
 
     @QueryParam("firstName")
     private String firstName;
@@ -12,9 +16,4 @@ public class UpdateCustomerRequestDTO {
 
     @QueryParam("email")
     private String email;
-
-    @QueryParam("phone")
-    private String phoneNumber;
-
 }
-

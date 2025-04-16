@@ -1,8 +1,8 @@
 package fhv.client;
 
-
 import at.fhv.sys.hotel.commands.shared.events.BookingCreated;
 import at.fhv.sys.hotel.commands.shared.events.CustomerCreated;
+import at.fhv.sys.hotel.commands.shared.events.RoomCreated;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Produces;
@@ -25,4 +25,10 @@ public interface EventBusClient {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     BookingCreated processBookingCreatedEvent(BookingCreated event);
+
+    @POST
+    @Path("/roomCreated")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    RoomCreated processRoomCreatedEvent(RoomCreated event);
 }

@@ -1,6 +1,6 @@
 package fhv.query.controller.booking;
 
-import at.fhv.sys.hotel.commands.shared.dto.BookingResponseDTO;
+import at.fhv.sys.hotel.commands.shared.dto.booking.BookingResponseDTO;
 import at.fhv.sys.hotel.commands.shared.events.BookingCreated;
 import fhv.projection.booking.BookingProjection;
 import jakarta.inject.Inject;

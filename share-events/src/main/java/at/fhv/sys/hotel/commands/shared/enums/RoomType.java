@@ -1,4 +1,4 @@
-package fhv.models.room;
+package at.fhv.sys.hotel.commands.shared.enums;
 
 public enum RoomType {
     Studio("Studio"),
