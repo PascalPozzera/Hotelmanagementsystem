@@ -1,5 +1,6 @@
 package fhv.models.customer;
 
+import at.fhv.sys.hotel.commands.shared.dto.CustomerResponseDTO;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
 
@@ -14,7 +15,14 @@ public class CustomerQueryPanacheModel extends PanacheEntity {
     public String email;
 
     public CustomerQueryPanacheModel() {
+    }
 
+    public CustomerResponseDTO toDTO() {
+        return new CustomerResponseDTO(
+                this.userId,
+                this.firstName,
+                this.lastName,
+                this.email);
     }
 
     public CustomerQueryPanacheModel(String userId, String firstName, String lastName, String email) {

@@ -1,5 +1,6 @@
 package fhv.models.booking;
 
+import at.fhv.sys.hotel.commands.shared.dto.BookingResponseDTO;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
 
@@ -27,6 +28,17 @@ public class BookingQueryPanacheModel extends PanacheEntity {
         this.startDate = startDate;
         this.endDate = endDate;
         this.numberOfGuests = numberOfGuests;
+    }
+
+    public BookingResponseDTO toDTO() {
+        return new BookingResponseDTO(
+                this.bookingId,
+                this.roomNumber,
+                this.customerId,
+                this.startDate,
+                this.endDate,
+                this.numberOfGuests
+        );
     }
 
     @Override

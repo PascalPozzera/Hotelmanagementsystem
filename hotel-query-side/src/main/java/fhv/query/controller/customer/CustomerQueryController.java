@@ -1,12 +1,16 @@
 package fhv.query.controller.customer;
 
+import at.fhv.sys.hotel.commands.shared.dto.CustomerResponseDTO;
 import at.fhv.sys.hotel.commands.shared.events.CustomerCreated;
 import fhv.projection.customer.CustomerProjection;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.jboss.logmanager.Logger;
+
+import java.util.List;
 
 @Path("/api")
 @Produces(MediaType.APPLICATION_JSON)
@@ -16,10 +20,15 @@ public class CustomerQueryController {
     @Inject
     CustomerProjection customerProjection;
 
-    public CustomerQueryController() {
+    @GET
+    @Path("/getCustomers")
+    public Response getCustomers() {
+        List<CustomerResponseDTO> customers = customerProjection.getAllCustomers();
+        return Response.ok(customers).build();
     }
 
     @POST
+    @Operation(hidden = true) //The POST method is hidden to prevent it from being visible to the user in Swagger.
     @Path("/customerCreated")
     public Response customerCreated(CustomerCreated event) {
         Logger.getAnonymousLogger().info("Received event: " + event);

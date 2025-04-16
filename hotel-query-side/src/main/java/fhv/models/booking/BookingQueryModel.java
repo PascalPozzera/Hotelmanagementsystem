@@ -1,5 +1,6 @@
 package fhv.models.booking;
 
+import at.fhv.sys.hotel.commands.shared.dto.BookingResponseDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.Getter;
@@ -31,6 +32,17 @@ public class BookingQueryModel {
         this.startDate = startDate;
         this.endDate = endDate;
         this.numberOfGuests = numberOfGuests;
+    }
+
+    public BookingResponseDTO toDTO() {
+        return new BookingResponseDTO(
+                this.bookingId,
+                this.roomNumber,
+                this.customerId,
+                this.startDate,
+                this.endDate,
+                this.numberOfGuests
+        );
     }
 
     @Override
