@@ -29,6 +29,7 @@ public class RoomQueryController {
     public Response getFreeRooms(@QueryParam("startDate") LocalDate startDate,
                                  @QueryParam("endDate") LocalDate endDate) {
 
+        //todo: add validation service
         if (startDate == null || endDate == null) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity("startDate and endDate query parameters are required (format: yyyy-MM-dd)").build();
@@ -44,18 +45,21 @@ public class RoomQueryController {
     }
 
     @GET
+    @Operation(hidden = true) //The method is hidden to prevent it from being visible to the user in Swagger.
     @Path("/{roomNumber}/exists")
     public RoomResponseDTO doesRoomExist(@PathParam("roomNumber") int roomNumber) {
         return roomProjection.getRoomByRoomNumber(roomNumber);
     }
 
     @GET
+    @Operation(hidden = true) //The method is hidden to prevent it from being visible to the user in Swagger.
     @Path("/getRoom")
     public RoomResponseDTO getRoom(@BeanParam RoomRequestDTO request) {
         return roomProjection.getRoomByRoomNumber(request.getRoomNumber());
     }
 
     @GET
+    @Operation(hidden = true) //The method is hidden to prevent it from being visible to the user in Swagger.
     @Path("/validateDate")
     public BookingAvailabilityResponseDTO isBookingDateValide(@BeanParam BookingRequestDTO request) {
         boolean available = roomProjection.isRoomAvailable(
@@ -67,7 +71,7 @@ public class RoomQueryController {
     }
 
     @POST
-    @Operation(hidden = true) //The POST method is hidden to prevent it from being visible to the user in Swagger.
+    @Operation(hidden = true) //The method is hidden to prevent it from being visible to the user in Swagger.
     @Path("/roomCreated")
     public Response roomCreated(RoomCreated event) {
         Logger.getAnonymousLogger().info("Received event: " + event);

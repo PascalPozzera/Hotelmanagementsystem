@@ -28,7 +28,7 @@ public class BookingQueryController {
     }
 
     @POST
-    @Operation(hidden = true) //The POST method is hidden to prevent it from being visible to the user in Swagger.
+    @Operation(hidden = true) //The method is hidden to prevent it from being visible to the user in Swagger.
     @Path("/bookingCreated")
     public Response bookingCreated(BookingCreated event) {
         Logger.getAnonymousLogger().info("Received event: " + event);

@@ -29,6 +29,7 @@ public class CustomerQueryController {
     }
 
     @GET
+    @Operation(hidden = true) //The method is hidden to prevent it from being visible to the user in Swagger.
     @Path("/emailExists")
     public Response checkEmailExist(@BeanParam CustomerRequestDTO customerRequestDTO) {
         CustomerResponseDTO customer = customerProjection.getCustomerByEmail(customerRequestDTO);
@@ -36,7 +37,7 @@ public class CustomerQueryController {
     }
 
     @POST
-    @Operation(hidden = true) //The POST method is hidden to prevent it from being visible to the user in Swagger.
+    @Operation(hidden = true) //The method is hidden to prevent it from being visible to the user in Swagger.
     @Path("/customerCreated")
     public Response customerCreated(CustomerCreated event) {
         Logger.getAnonymousLogger().info("Received event: " + event);
