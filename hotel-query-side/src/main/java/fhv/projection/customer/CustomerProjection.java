@@ -18,17 +18,12 @@ public class CustomerProjection {
     @Inject
     CustomerServicePanache customerServicePanache;
 
-    public List<CustomerResponseDTO> getAllCustomers() {
-
-        List<CustomerQueryPanacheModel> bookings = customerServicePanache.getAllCustomers();
-
-        return bookings.stream()
-                .map(CustomerQueryPanacheModel::toDTO)
-                .toList();
-    }
-
     public CustomerResponseDTO getCustomerByEmail(CustomerRequestDTO customerRequestDTO) {
         return customerServicePanache.getCustomerByEmail(customerRequestDTO.getEmail()).toDTO();
+    }
+
+    public List<CustomerResponseDTO> getCustomersByName(String name) {
+        return customerServicePanache.getCustomersByName(name).stream().map(CustomerQueryPanacheModel::toDTO).toList();
     }
 
     public void processCustomerCreatedEvent(CustomerCreated customerCreatedEvent) {

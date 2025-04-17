@@ -24,8 +24,8 @@ public class CustomerQueryController {
 
     @GET
     @Path("/getCustomers")
-    public Response getCustomers() {
-        List<CustomerResponseDTO> customers = customerProjection.getAllCustomers();
+    public Response getCustomers(@QueryParam("name") String name) {
+        List<CustomerResponseDTO> customers = customerProjection.getCustomersByName(name);
         return Response.ok(customers).build();
     }
 

@@ -4,7 +4,6 @@ import jakarta.ws.rs.QueryParam;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.util.UUID;
 
 @Getter

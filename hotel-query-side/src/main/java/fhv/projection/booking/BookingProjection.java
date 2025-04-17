@@ -38,6 +38,10 @@ public class BookingProjection {
         return count == 0;
     }
 
+    public List<BookingResponseDTO> getBookingsInDateRange(LocalDate from, LocalDate to) {
+        return bookingServicePanache.getBookingsInDateRange(from, to).stream().map(BookingQueryPanacheModel::toDTO).toList();
+    }
+
     public void processBookingCreatedEvent(BookingCreated bookingCreatedEvent) {
 
         Logger.getAnonymousLogger().info("Processing event: " + bookingCreatedEvent);

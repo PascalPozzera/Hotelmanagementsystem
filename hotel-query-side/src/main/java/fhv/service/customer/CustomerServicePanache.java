@@ -19,6 +19,17 @@ public class CustomerServicePanache {
         return CustomerQueryPanacheModel.find("email", email).firstResult();
     }
 
+    public List<CustomerQueryPanacheModel> getCustomersByName(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            return CustomerQueryPanacheModel.listAll();
+        }
+
+        return CustomerQueryPanacheModel.find(
+                "lower(firstName) like ?1 or lower(lastName) like ?1",
+                "%" + name.toLowerCase() + "%"
+        ).list();
+    }
+
     @Transactional
     public void createCustomer(CustomerQueryPanacheModel customer) {
         customer.persist();

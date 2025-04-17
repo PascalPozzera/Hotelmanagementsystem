@@ -6,6 +6,7 @@ import io.quarkus.hibernate.orm.panache.Panache;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,6 +39,24 @@ public class BookingServicePanache {
             existing.paymentMethod = panacheModel.paymentMethod;
             existing.isPayed = panacheModel.isPayed;
             Panache.getEntityManager().flush();
+        }
+    }
+
+    public List<BookingQueryPanacheModel> getBookingsInDateRange(LocalDate from, LocalDate to) {
+        if (from != null && to != null) {
+            return BookingQueryPanacheModel.find(
+                    "startDate >= ?1 AND endDate <= ?2", from, to
+            ).list();
+        } else if (from != null) {
+            return BookingQueryPanacheModel.find(
+                    "startDate >= ?1", from
+            ).list();
+        } else if (to != null) {
+            return BookingQueryPanacheModel.find(
+                    "endDate <= ?1", to
+            ).list();
+        } else {
+            return getAllBookings();
         }
     }
 }

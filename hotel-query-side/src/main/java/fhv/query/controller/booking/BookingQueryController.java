@@ -12,6 +12,7 @@ import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.jboss.logmanager.Logger;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Path("/api")
@@ -24,8 +25,8 @@ public class BookingQueryController {
 
     @GET
     @Path("/getBookings")
-    public Response getBookings() {
-        List<BookingResponseDTO> bookings = bookingProjection.getAllBookings();
+    public Response getBookings(@QueryParam("from") LocalDate from, @QueryParam("to") LocalDate to) {
+        List<BookingResponseDTO> bookings = bookingProjection.getBookingsInDateRange(from, to);
         return Response.ok(bookings).build();
     }
 
