@@ -1,14 +1,12 @@
 package fhv.controller;
 
+import at.fhv.sys.hotel.commands.shared.dto.customer.CustomerRequestDTO;
 import fhv.commands.customer.CreateCustomerCommand;
 import fhv.commands.customer.CustomerAggregate;
-import at.fhv.sys.hotel.commands.shared.dto.customer.CustomerRequestDTO;
 import fhv.commands.customer.UpdateCustomerCommand;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
-
-import java.util.UUID;
 
 @Path("/api")
 @Produces(MediaType.APPLICATION_JSON)
@@ -28,12 +26,5 @@ public class CustomerCommandController {
     @Path("/update")
     public String updateCustomer(@BeanParam CustomerRequestDTO requestDTO) {
         return customerAggregate.handle(new UpdateCustomerCommand(requestDTO.getFirstName(), requestDTO.getLastname(), requestDTO.getEmail()));
-    }
-
-    @POST
-    @Path("/{customerId}/delete")
-    public String deleteCustomer(@PathParam("customerId") String customerId) {
-        // TBD: delete customer
-        return "Customer deleted";
     }
 }

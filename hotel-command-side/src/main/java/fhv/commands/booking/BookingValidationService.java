@@ -5,6 +5,7 @@ import at.fhv.sys.hotel.commands.shared.dto.booking.BookingRequestDTO;
 import at.fhv.sys.hotel.commands.shared.dto.customer.CustomerRequestDTO;
 import at.fhv.sys.hotel.commands.shared.dto.room.RoomRequestDTO;
 import at.fhv.sys.hotel.commands.shared.dto.room.RoomResponseDTO;
+import at.fhv.sys.hotel.commands.shared.enums.PaymentMethod;
 import fhv.client.CustomerQueryClient;
 import fhv.client.RoomQueryClient;
 import io.quarkus.logging.Log;
@@ -141,6 +142,31 @@ public class BookingValidationService {
 
         if (command.roomNumber() <= 0) {
             errors.add("Room number must be a positive integer.");
+        }
+
+        return errors;
+    }
+
+    public List<String> validatePayBookingCommand(PayBookingCommand command) {
+
+        List<String> errors = new ArrayList<>();
+
+        if (command.bookingId() == null) {
+            errors.add("Booking ID must be not null.");
+        }
+
+        if (command.email() == null || command.email().isBlank()) {
+            errors.add("Email must not be empty.");
+        } else if (!command.email().matches("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+            errors.add("Email format is invalid.");
+        }
+
+        if (command.roomNumber() <= 0) {
+            errors.add("Room number must be a positive number.");
+        }
+
+        if (command.paymentMethod() == null || command.paymentMethod() == PaymentMethod.NOT_SELECTED) {
+            errors.add("Payment method must be selected.");
         }
 
         return errors;

@@ -2,6 +2,7 @@ package fhv.client;
 
 import at.fhv.sys.hotel.commands.shared.events.booking.BookingCancelled;
 import at.fhv.sys.hotel.commands.shared.events.booking.BookingCreated;
+import at.fhv.sys.hotel.commands.shared.events.booking.BookingPayed;
 import at.fhv.sys.hotel.commands.shared.events.customer.CustomerCreated;
 import at.fhv.sys.hotel.commands.shared.events.RoomCreated;
 import at.fhv.sys.hotel.commands.shared.events.customer.CustomerUpdated;
@@ -39,6 +40,12 @@ public interface EventBusClient {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     BookingCancelled processBookingCancelledEvent(BookingCancelled event);
+
+    @POST
+    @Path("/bookingPayed")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    BookingPayed processBookingPayedEvent(BookingPayed event);
 
     @POST
     @Path("/roomCreated")

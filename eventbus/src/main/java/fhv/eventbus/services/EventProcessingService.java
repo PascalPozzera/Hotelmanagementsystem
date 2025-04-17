@@ -3,6 +3,7 @@ package fhv.eventbus.services;
 
 import at.fhv.sys.hotel.commands.shared.events.booking.BookingCancelled;
 import at.fhv.sys.hotel.commands.shared.events.booking.BookingCreated;
+import at.fhv.sys.hotel.commands.shared.events.booking.BookingPayed;
 import at.fhv.sys.hotel.commands.shared.events.customer.*;
 import at.fhv.sys.hotel.commands.shared.events.RoomCreated;
 import fhv.eventbus.client.QueryClient;
@@ -30,6 +31,7 @@ public class EventProcessingService {
             case CustomerCreated customer -> queryClient.forwardCustomerCreatedEvent(customer);
             case CustomerUpdated customerUpdated -> queryClient.forwardCustomerUpdatedEvent(customerUpdated);
             case BookingCreated booking -> queryClient.forwardBookingCreatedEvent(booking);
+            case BookingPayed bookingPayed -> queryClient.forwardBookingPayedEvent(bookingPayed);
             case BookingCancelled bookingCancelled -> queryClient.forwardBookingCancelledEvent(bookingCancelled);
             case RoomCreated room -> queryClient.forwardRoomCreatedEvent(room);
             default -> System.out.println("Unknown event type: " + eventObject.getClass().getSimpleName());

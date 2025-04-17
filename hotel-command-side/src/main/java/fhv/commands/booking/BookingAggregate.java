@@ -2,6 +2,7 @@ package fhv.commands.booking;
 
 import at.fhv.sys.hotel.commands.shared.events.booking.BookingCancelled;
 import at.fhv.sys.hotel.commands.shared.events.booking.BookingCreated;
+import at.fhv.sys.hotel.commands.shared.events.booking.BookingPayed;
 import fhv.client.EventBusClient;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -55,6 +56,23 @@ public class BookingAggregate {
 
         Logger.getAnonymousLogger().info(eventClient.processBookingCreatedEvent(event).toString());
         return command.toString();
+    }
+
+    public String handle(PayBookingCommand command) {
+
+        List<String> errors = bookingValidationService.validatePayBookingCommand(command);
+        if (!errors.isEmpty()) {
+            throw new IllegalArgumentException("Pay booking validation failed: " + String.join("; ", errors));
+        }
+
+        if (!bookingValidationService.validateEmail(command.email())) {
+            throw new IllegalArgumentException("Email: " + command.email() + " does not exist.");
+        }
+
+        BookingPayed event = new BookingPayed(command.bookingId(), command.email(), command.roomNumber(), true, command.paymentMethod());
+        Logger.getAnonymousLogger().info(eventClient.processBookingPayedEvent(event).toString());
+
+        return "Booking payed: " + command.bookingId();
     }
 
     public String handle(CancelBookingCommand command) {

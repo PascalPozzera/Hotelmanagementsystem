@@ -1,11 +1,12 @@
 package fhv.controller;
 
 import at.fhv.sys.hotel.commands.shared.dto.booking.BookingCancelRequestDTO;
-import at.fhv.sys.hotel.commands.shared.dto.booking.BookingPayingRequestDTO;
+import at.fhv.sys.hotel.commands.shared.dto.booking.BookingPayRequestDTO;
 import at.fhv.sys.hotel.commands.shared.dto.booking.BookingRequestDTO;
 import fhv.commands.booking.BookingAggregate;
 import fhv.commands.booking.CancelBookingCommand;
 import fhv.commands.booking.CreateBookingCommand;
+import fhv.commands.booking.PayBookingCommand;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -41,8 +42,11 @@ public class BookingCommandController {
 
     @POST
     @Path("/payBooking")
-    public String payBooking(@BeanParam BookingPayingRequestDTO requestDTO) {
-        // TBD: pay booking
-        return "Booking payed";
+    public String payBooking(@BeanParam BookingPayRequestDTO requestDTO) {
+        return bookingAggregate.handle(new PayBookingCommand(
+                requestDTO.getBookingId(),
+                requestDTO.getEmail(),
+                requestDTO.getRoomNumber(),
+                requestDTO.getPaymentMethod()));
     }
 }

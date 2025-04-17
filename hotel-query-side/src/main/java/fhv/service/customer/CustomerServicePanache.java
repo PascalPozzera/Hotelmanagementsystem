@@ -32,7 +32,6 @@ public class CustomerServicePanache {
             existing.firstName = updatedCustomer.firstName;
             existing.lastName = updatedCustomer.lastName;
             Panache.getEntityManager().flush();
-
         }
     }
 }

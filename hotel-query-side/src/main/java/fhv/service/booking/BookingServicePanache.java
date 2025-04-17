@@ -2,6 +2,7 @@ package fhv.service.booking;
 
 
 import fhv.models.booking.BookingQueryPanacheModel;
+import io.quarkus.hibernate.orm.panache.Panache;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 
@@ -27,5 +28,16 @@ public class BookingServicePanache {
     @Transactional
     public void cancelBooking(BookingQueryPanacheModel booking) {
         booking.delete();
+    }
+
+    @Transactional
+    public void updateBooking(BookingQueryPanacheModel panacheModel) {
+        BookingQueryPanacheModel existing = getBookingById(panacheModel.bookingId);
+
+        if (existing != null) {
+            existing.paymentMethod = panacheModel.paymentMethod;
+            existing.isPayed = panacheModel.isPayed;
+            Panache.getEntityManager().flush();
+        }
     }
 }

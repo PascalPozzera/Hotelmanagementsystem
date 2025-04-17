@@ -1,8 +1,10 @@
 package fhv.projection.booking;
 
 import at.fhv.sys.hotel.commands.shared.dto.booking.BookingResponseDTO;
+import at.fhv.sys.hotel.commands.shared.enums.PaymentMethod;
 import at.fhv.sys.hotel.commands.shared.events.booking.BookingCancelled;
 import at.fhv.sys.hotel.commands.shared.events.booking.BookingCreated;
+import at.fhv.sys.hotel.commands.shared.events.booking.BookingPayed;
 import fhv.models.booking.BookingQueryPanacheModel;
 import fhv.service.booking.BookingServicePanache;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -46,10 +48,27 @@ public class BookingProjection {
                 bookingCreatedEvent.getEmail(),
                 bookingCreatedEvent.getStartDate(),
                 bookingCreatedEvent.getEndDate(),
-                bookingCreatedEvent.getNumberOfGuests()
+                bookingCreatedEvent.getNumberOfGuests(),
+                false,
+                PaymentMethod.NOT_SELECTED
         );
 
         bookingServicePanache.createBooking(panacheModel);
+    }
+
+    public void processBookingPayedEvent(BookingPayed bookingPayedEvent) {
+
+        Logger.getAnonymousLogger().info("Processing event: " + bookingPayedEvent);
+
+        BookingQueryPanacheModel panacheModel = new BookingQueryPanacheModel(
+                bookingPayedEvent.getBookingId(),
+                bookingPayedEvent.getRoomNumber(),
+                bookingPayedEvent.getEmail(),
+                bookingPayedEvent.isPayed(),
+                bookingPayedEvent.getPaymentMethod()
+        );
+
+        bookingServicePanache.updateBooking(panacheModel);
     }
 
     public void processBookingCancelledEvent(BookingCancelled bookingCancelledEvent) {

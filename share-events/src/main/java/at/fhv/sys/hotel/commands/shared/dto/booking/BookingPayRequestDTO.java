@@ -5,12 +5,14 @@ import jakarta.ws.rs.QueryParam;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Getter
 @Setter
-public class BookingPayingRequestDTO {
+public class BookingPayRequestDTO {
 
     @QueryParam("bookingId")
-    private long bookingId;
+    private UUID bookingId;
 
     @QueryParam("customerEmail")
     private String email;

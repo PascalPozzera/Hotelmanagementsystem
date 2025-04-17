@@ -3,6 +3,7 @@ package fhv.query.controller.booking;
 import at.fhv.sys.hotel.commands.shared.dto.booking.BookingResponseDTO;
 import at.fhv.sys.hotel.commands.shared.events.booking.BookingCancelled;
 import at.fhv.sys.hotel.commands.shared.events.booking.BookingCreated;
+import at.fhv.sys.hotel.commands.shared.events.booking.BookingPayed;
 import fhv.projection.booking.BookingProjection;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -34,6 +35,15 @@ public class BookingQueryController {
     public Response bookingCreated(BookingCreated event) {
         Logger.getAnonymousLogger().info("Received event: " + event);
         bookingProjection.processBookingCreatedEvent(event);
+        return Response.ok(event).build();
+    }
+
+    @POST
+    @Operation(hidden = true) //The method is hidden to prevent it from being visible to the user in Swagger.
+    @Path("/bookingPayed")
+    public Response bookingPayed(BookingPayed event) {
+        Logger.getAnonymousLogger().info("Received event: " + event);
+        bookingProjection.processBookingPayedEvent(event);
         return Response.ok(event).build();
     }
 
