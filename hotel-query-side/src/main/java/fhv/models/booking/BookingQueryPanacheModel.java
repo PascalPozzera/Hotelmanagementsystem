@@ -2,13 +2,18 @@ package fhv.models.booking;
 
 import at.fhv.sys.hotel.commands.shared.dto.booking.BookingResponseDTO;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
-public class BookingQueryPanacheModel extends PanacheEntity {
+public class BookingQueryPanacheModel extends PanacheEntityBase {
 
+    @Id
+    public UUID bookingId;
     public int roomNumber;
     public String email;
     public LocalDate startDate;
@@ -18,8 +23,8 @@ public class BookingQueryPanacheModel extends PanacheEntity {
     public BookingQueryPanacheModel() {
     }
 
-    public BookingQueryPanacheModel(int roomNumber, String email, LocalDate startDate, LocalDate endDate, int numberOfGuests) {
-
+    public BookingQueryPanacheModel(UUID bookingId, int roomNumber, String email, LocalDate startDate, LocalDate endDate, int numberOfGuests) {
+        this.bookingId = bookingId;
         this.roomNumber = roomNumber;
         this.email = email;
         this.startDate = startDate;
@@ -29,6 +34,7 @@ public class BookingQueryPanacheModel extends PanacheEntity {
 
     public BookingResponseDTO toDTO() {
         return new BookingResponseDTO(
+                this.bookingId,
                 this.roomNumber,
                 this.email,
                 this.startDate,
@@ -40,8 +46,9 @@ public class BookingQueryPanacheModel extends PanacheEntity {
     @Override
     public String toString() {
         return "BookingQueryPanacheModel{" +
-                ", roomNumber='" + roomNumber + '\'' +
-                ", customerId='" + email + '\'' +
+                "bookingId=" + bookingId +
+                ", roomNumber=" + roomNumber +
+                ", email='" + email + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", numberOfGuests=" + numberOfGuests +

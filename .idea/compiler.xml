@@ -8,11 +8,18 @@
         <processorPath useClasspath="false">
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.32/17d46b3e205515e1e8efd3ee4d57ce8018914163/lombok-1.18.32.jar" />
         </processorPath>
-        <module name="eventbus.share-events.main" />
-        <module name="eventbus.main" />
-        <module name="eventbus.test" />
-        <module name="eventbus.share-events.test" />
+        <module name="hotel-command-side.share-events.test" />
+        <module name="hotel-command-side.test" />
+        <module name="hotel-command-side.share-events.main" />
+        <module name="hotel-command-side.main" />
       </profile>
     </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="eventbus.main" options="-parameters" />
+      <module name="hotel-command-side.main" options="-parameters" />
+      <module name="hotel-query-side.main" options="-parameters" />
+    </option>
   </component>
 </project>

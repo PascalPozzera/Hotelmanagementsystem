@@ -1,7 +1,8 @@
 package fhv.projection.booking;
 
 import at.fhv.sys.hotel.commands.shared.dto.booking.BookingResponseDTO;
-import at.fhv.sys.hotel.commands.shared.events.BookingCreated;
+import at.fhv.sys.hotel.commands.shared.events.booking.BookingCancelled;
+import at.fhv.sys.hotel.commands.shared.events.booking.BookingCreated;
 import fhv.models.booking.BookingQueryPanacheModel;
 import fhv.service.booking.BookingServicePanache;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -40,6 +41,7 @@ public class BookingProjection {
         Logger.getAnonymousLogger().info("Processing event: " + bookingCreatedEvent);
 
         BookingQueryPanacheModel panacheModel = new BookingQueryPanacheModel(
+                bookingCreatedEvent.getBookingId(),
                 bookingCreatedEvent.getRoomNumber(),
                 bookingCreatedEvent.getEmail(),
                 bookingCreatedEvent.getStartDate(),
@@ -48,5 +50,14 @@ public class BookingProjection {
         );
 
         bookingServicePanache.createBooking(panacheModel);
+    }
+
+    public void processBookingCancelledEvent(BookingCancelled bookingCancelledEvent) {
+
+        Logger.getAnonymousLogger().info("Processing event: " + bookingCancelledEvent);
+
+        BookingQueryPanacheModel panacheModel = bookingServicePanache.getBookingById(bookingCancelledEvent.getBookingId());
+
+        bookingServicePanache.cancelBooking(panacheModel);
     }
 }

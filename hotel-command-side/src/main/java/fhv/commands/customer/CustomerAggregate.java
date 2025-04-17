@@ -8,6 +8,7 @@ import jakarta.inject.Inject;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 @ApplicationScoped
@@ -32,7 +33,7 @@ public class CustomerAggregate {
             throw new IllegalArgumentException("Email: " + command.email() + " already exist.");
         }
 
-        CustomerCreated event = new CustomerCreated(command.firstName(), command.lastName(), command.email());
+        CustomerCreated event = new CustomerCreated(UUID.randomUUID(), command.firstName(), command.lastName(), command.email());
 
         Logger.getAnonymousLogger().info(eventClient.processCustomerCreatedEvent(event).toString());
 

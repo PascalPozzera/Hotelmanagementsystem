@@ -1,6 +1,7 @@
 package fhv.eventbus.services;
 
-import at.fhv.sys.hotel.commands.shared.events.BookingCreated;
+import at.fhv.sys.hotel.commands.shared.events.booking.BookingCancelled;
+import at.fhv.sys.hotel.commands.shared.events.booking.BookingCreated;
 import at.fhv.sys.hotel.commands.shared.events.CustomerCreated;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fhv.eventbus.client.QueryClient;
@@ -51,6 +52,11 @@ public class ReplayService {
                         BookingCreated bookingCreated = objectMapper.readValue(payload, BookingCreated.class);
                         queryClient.forwardBookingCreatedEvent(bookingCreated);
                         LOG.info("Replayed: " + type + " -> " + bookingCreated.getEmail());
+                    }
+                    case "BookingCancelled" -> {
+                        BookingCancelled bookingCancelled = objectMapper.readValue(payload, BookingCancelled.class);
+                        queryClient.forwardBookingCancelledEvent(bookingCancelled);
+                        LOG.info("Replayed: " + type + " -> " + bookingCancelled.getEmail());
                     }
                     default -> LOG.warn("Unknown event type: " + type);
                 }

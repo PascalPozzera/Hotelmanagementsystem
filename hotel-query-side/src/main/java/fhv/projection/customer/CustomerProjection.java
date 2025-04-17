@@ -9,6 +9,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 @ApplicationScoped
@@ -34,6 +35,7 @@ public class CustomerProjection {
         Logger.getAnonymousLogger().info("Processing event: " + customerCreatedEvent);
 
         CustomerQueryPanacheModel customer = new CustomerQueryPanacheModel(
+                customerCreatedEvent.getCustomerId(),
                 customerCreatedEvent.getFirstName(),
                 customerCreatedEvent.getLastName(),
                 customerCreatedEvent.getEmail());

@@ -1,8 +1,10 @@
 package at.fhv.sys.hotel.commands.shared.dto.booking;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
-public record BookingResponseDTO(int roomNumber,
+public record BookingResponseDTO(UUID bookingId,
+                                 int roomNumber,
                                  String email,
                                  LocalDate startDate,
                                  LocalDate endDate,

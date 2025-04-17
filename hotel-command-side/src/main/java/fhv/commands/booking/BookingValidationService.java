@@ -126,5 +126,25 @@ public class BookingValidationService {
             return false;
         }
     }
+
+    public List<String> validateCancelBookingCommand(CancelBookingCommand command) {
+        List<String> errors = new ArrayList<>();
+
+        if (command.bookingId() == null) {
+            errors.add("Booking ID must be a positive number.");
+        }
+
+        if (command.email() == null || command.email().isBlank()) {
+            errors.add("Email must not be empty.");
+        } else if (!command.email().matches("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+            errors.add("Email format is invalid.");
+        }
+
+        if (command.roomNumber() <= 0) {
+            errors.add("Room number must be a positive integer.");
+        }
+
+        return errors;
+    }
 }
 

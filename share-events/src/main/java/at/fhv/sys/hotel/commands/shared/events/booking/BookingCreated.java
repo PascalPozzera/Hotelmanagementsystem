@@ -1,4 +1,4 @@
-package at.fhv.sys.hotel.commands.shared.events;
+package at.fhv.sys.hotel.commands.shared.events.booking;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class BookingCreated {
 
+    private UUID bookingId;
     private int roomNumber;
     private String email;
     private LocalDate startDate;
@@ -20,12 +21,14 @@ public class BookingCreated {
     private int numberOfGuests;
 
     public BookingCreated(
+            UUID bookingId,
             int roomNumber,
             String email,
             LocalDate startDate,
             LocalDate endDate,
             boolean isPayed,
             int numberOfGuests) {
+        this.bookingId = bookingId;
         this.roomNumber = roomNumber;
         this.email = email;
         this.startDate = startDate;
