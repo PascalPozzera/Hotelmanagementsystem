@@ -28,6 +28,12 @@ public class CustomerQueryPanacheModel extends PanacheEntityBase {
         this.email = email;
     }
 
+    public CustomerQueryPanacheModel(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
     public CustomerResponseDTO toDTO() {
         return new CustomerResponseDTO(
                 this.customerId,

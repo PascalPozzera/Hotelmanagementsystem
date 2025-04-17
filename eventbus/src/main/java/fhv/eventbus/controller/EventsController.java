@@ -2,7 +2,7 @@ package fhv.eventbus.controller;
 
 import at.fhv.sys.hotel.commands.shared.events.booking.BookingCancelled;
 import at.fhv.sys.hotel.commands.shared.events.booking.BookingCreated;
-import at.fhv.sys.hotel.commands.shared.events.CustomerCreated;
+import at.fhv.sys.hotel.commands.shared.events.customer.*;
 import at.fhv.sys.hotel.commands.shared.events.RoomCreated;
 import fhv.eventbus.services.EventProcessingService;
 import jakarta.inject.Inject;
@@ -26,6 +26,15 @@ public class EventsController {
     @Operation(hidden = true) //The POST method is hidden to prevent it from being visible to the user in Swagger.
     @Path("/customerCreated")
     public Response customerCreated(CustomerCreated event) {
+        Logger.getAnonymousLogger().info("Received event: " + event);
+        eventStoreService.processEvent("customer-email: " + event.getEmail(), event);
+        return Response.ok(event).build();
+    }
+
+    @POST
+    @Operation(hidden = true) //The POST method is hidden to prevent it from being visible to the user in Swagger.
+    @Path("/customerUpdated")
+    public Response customerUpdated(CustomerUpdated event) {
         Logger.getAnonymousLogger().info("Received event: " + event);
         eventStoreService.processEvent("customer-email: " + event.getEmail(), event);
         return Response.ok(event).build();

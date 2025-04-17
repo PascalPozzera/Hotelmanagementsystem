@@ -3,7 +3,7 @@ package fhv.eventbus.services;
 
 import at.fhv.sys.hotel.commands.shared.events.booking.BookingCancelled;
 import at.fhv.sys.hotel.commands.shared.events.booking.BookingCreated;
-import at.fhv.sys.hotel.commands.shared.events.CustomerCreated;
+import at.fhv.sys.hotel.commands.shared.events.customer.*;
 import at.fhv.sys.hotel.commands.shared.events.RoomCreated;
 import fhv.eventbus.client.QueryClient;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -28,6 +28,7 @@ public class EventProcessingService {
 
         switch (eventObject) {
             case CustomerCreated customer -> queryClient.forwardCustomerCreatedEvent(customer);
+            case CustomerUpdated customerUpdated -> queryClient.forwardCustomerUpdatedEvent(customerUpdated);
             case BookingCreated booking -> queryClient.forwardBookingCreatedEvent(booking);
             case BookingCancelled bookingCancelled -> queryClient.forwardBookingCancelledEvent(bookingCancelled);
             case RoomCreated room -> queryClient.forwardRoomCreatedEvent(room);

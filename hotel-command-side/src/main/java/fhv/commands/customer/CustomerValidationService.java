@@ -27,23 +27,11 @@ public class CustomerValidationService {
     CustomerQueryClient customerQueryClient;
 
     public List<String> validateCreateCustomerCommand(CreateCustomerCommand command) {
-        List<String> errors = new ArrayList<>();
+        return checkCommands(command.firstName(), command.lastName(), command.email());
+    }
 
-        if (command.firstName() == null || command.firstName().isBlank()) {
-            errors.add("First name must not be null or empty.");
-        }
-
-        if (command.lastName() == null || command.lastName().isBlank()) {
-            errors.add("Last name must not be null or empty.");
-        }
-
-        if (command.email() == null || command.email().isBlank()) {
-            errors.add("Email must not be null or empty.");
-        } else if (!command.email().contains("@")) {
-            errors.add("Email must be a valid address.");
-        }
-
-        return errors;
+    public List<String> validateUpdateCustomerCommand(UpdateCustomerCommand command) {
+        return checkCommands(command.firstName(), command.lastName(), command.email());
     }
 
     public boolean validateEmail(String email) {
@@ -59,6 +47,28 @@ public class CustomerValidationService {
             Log.error("Error while checking email exists", e);
             return false;
         }
+    }
+
+    private List<String> checkCommands(String firstName, String lastName, String email) {
+
+        List<String> errors = new ArrayList<>();
+
+        if (firstName == null || firstName.isBlank()) {
+            errors.add("First name must not be null or empty.");
+        }
+
+        if (lastName == null || lastName.isBlank()) {
+            errors.add("Last name must not be null or empty.");
+        }
+
+        if (email == null || email.isBlank()) {
+            errors.add("Email must not be null or empty.");
+        } else if (!email.contains("@")) {
+            errors.add("Email must be a valid address.");
+        }
+
+        return errors;
+
     }
 }
 

@@ -2,14 +2,14 @@ package fhv.projection.customer;
 
 import at.fhv.sys.hotel.commands.shared.dto.customer.CustomerRequestDTO;
 import at.fhv.sys.hotel.commands.shared.dto.customer.CustomerResponseDTO;
-import at.fhv.sys.hotel.commands.shared.events.CustomerCreated;
+import at.fhv.sys.hotel.commands.shared.events.customer.CustomerCreated;
+import at.fhv.sys.hotel.commands.shared.events.customer.CustomerUpdated;
 import fhv.models.customer.CustomerQueryPanacheModel;
 import fhv.service.customer.CustomerServicePanache;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.logging.Logger;
 
 @ApplicationScoped
@@ -41,5 +41,16 @@ public class CustomerProjection {
                 customerCreatedEvent.getEmail());
 
         customerServicePanache.createCustomer(customer);
+    }
+
+    public void processCustomerUpdatedEvent(CustomerUpdated customerUpdatedEvent) {
+        Logger.getAnonymousLogger().info("Processing event: " + customerUpdatedEvent);
+
+        CustomerQueryPanacheModel customer = new CustomerQueryPanacheModel(
+                customerUpdatedEvent.getFirstName(),
+                customerUpdatedEvent.getLastName(),
+                customerUpdatedEvent.getEmail());
+
+        customerServicePanache.updateCustomer(customer);
     }
 }

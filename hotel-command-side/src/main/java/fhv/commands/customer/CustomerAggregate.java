@@ -1,8 +1,9 @@
 package fhv.commands.customer;
 
-import at.fhv.sys.hotel.commands.shared.events.CustomerCreated;
+import at.fhv.sys.hotel.commands.shared.events.customer.CustomerCreated;
+import at.fhv.sys.hotel.commands.shared.events.customer.CustomerUpdated;
+import fhv.client.CustomerQueryClient;
 import fhv.client.EventBusClient;
-import fhv.commands.booking.BookingValidationService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
@@ -19,6 +20,10 @@ public class CustomerAggregate {
     EventBusClient eventClient;
 
     @Inject
+    @RestClient
+    CustomerQueryClient customerQueryClient;
+
+    @Inject
     CustomerValidationService customerValidationService;
 
     public String handle(CreateCustomerCommand command) {
@@ -29,7 +34,7 @@ public class CustomerAggregate {
             throw new IllegalArgumentException("Customer validation failed: " + String.join("; ", errors));
         }
 
-        if(customerValidationService.validateEmail(command.email())){
+        if (validateEmail(command.email())) {
             throw new IllegalArgumentException("Email: " + command.email() + " already exist.");
         }
 
@@ -38,6 +43,29 @@ public class CustomerAggregate {
         Logger.getAnonymousLogger().info(eventClient.processCustomerCreatedEvent(event).toString());
 
         return command.firstName() + " " + command.lastName();
+    }
+
+    public String handle(UpdateCustomerCommand command) {
+
+        List<String> errors = customerValidationService.validateUpdateCustomerCommand(command);
+
+        if (!errors.isEmpty()) {
+            throw new IllegalArgumentException("Update customer validation failed: " + String.join("; ", errors));
+        }
+
+        if (!validateEmail(command.email())) {
+            throw new IllegalArgumentException("Email: " + command.email() + " does not exist.");
+        }
+
+        CustomerUpdated event = new CustomerUpdated(command.firstName(), command.lastName(), command.email());
+
+        Logger.getAnonymousLogger().info(eventClient.processCustomerUpdatedEvent(event).toString());
+
+        return command.firstName() + " " + command.lastName();
+    }
+
+    private boolean validateEmail(String email) {
+        return customerValidationService.validateEmail(email);
     }
 
 }

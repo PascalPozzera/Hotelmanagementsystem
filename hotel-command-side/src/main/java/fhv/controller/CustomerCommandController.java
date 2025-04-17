@@ -3,6 +3,7 @@ package fhv.controller;
 import fhv.commands.customer.CreateCustomerCommand;
 import fhv.commands.customer.CustomerAggregate;
 import at.fhv.sys.hotel.commands.shared.dto.customer.CustomerRequestDTO;
+import fhv.commands.customer.UpdateCustomerCommand;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -24,10 +25,9 @@ public class CustomerCommandController {
     }
 
     @POST
-    @Path("/{customerId}/update")
-    public String updateCustomer(@PathParam("customerId") String customerId, @QueryParam("email") String email) {
-        // TBD: process customer
-        return "Customer updated";
+    @Path("/update")
+    public String updateCustomer(@BeanParam CustomerRequestDTO requestDTO) {
+        return customerAggregate.handle(new UpdateCustomerCommand(requestDTO.getFirstName(), requestDTO.getLastname(), requestDTO.getEmail()));
     }
 
     @POST

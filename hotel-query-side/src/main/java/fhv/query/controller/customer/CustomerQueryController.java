@@ -2,7 +2,8 @@ package fhv.query.controller.customer;
 
 import at.fhv.sys.hotel.commands.shared.dto.customer.CustomerRequestDTO;
 import at.fhv.sys.hotel.commands.shared.dto.customer.CustomerResponseDTO;
-import at.fhv.sys.hotel.commands.shared.events.CustomerCreated;
+import at.fhv.sys.hotel.commands.shared.events.customer.CustomerCreated;
+import at.fhv.sys.hotel.commands.shared.events.customer.CustomerUpdated;
 import fhv.projection.customer.CustomerProjection;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -42,6 +43,15 @@ public class CustomerQueryController {
     public Response customerCreated(CustomerCreated event) {
         Logger.getAnonymousLogger().info("Received event: " + event);
         customerProjection.processCustomerCreatedEvent(event);
+        return Response.ok(event).build();
+    }
+
+    @POST
+    @Operation(hidden = true) //The method is hidden to prevent it from being visible to the user in Swagger.
+    @Path("/customerUpdated")
+    public Response customerUpdated(CustomerUpdated event) {
+        Logger.getAnonymousLogger().info("Received event: " + event);
+        customerProjection.processCustomerUpdatedEvent(event);
         return Response.ok(event).build();
     }
 }
