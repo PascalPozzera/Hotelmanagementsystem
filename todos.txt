@@ -1,0 +1,7 @@
+Löschen der Command und Query-Modelle -> todo
+Auslesen aller Events -> todo
+Erzeugung der Command- und Query-Modelle (anhand hinterlegter Basisdatensätze) -> todo (Räume erl.)
+Customer Address and Birthday -> todo
+Booking timestamp when payed -> todo?
+
+Wiederherstellung durch die im Event-Store gespeicherten Events -> erl.
