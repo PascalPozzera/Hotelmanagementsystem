@@ -1,95 +1,40 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Link from "next/link";
 
-export default function Home() {
+export default function Dashboard() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+      <div>
+        <header className="mb-20 text-center">
+          <h1 className="text-4xl font-bold text-gray-800">Hotel Management Dashboard</h1>
+        </header>
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <Link
+              href="/customers"
+              className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-lg transition-shadow border-t-4 border-blue-500 hover:border-blue-600"
           >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
+            <h2 className="text-2xl font-semibold mb-2 text-gray-800">Customers</h2>
+            <p className="text-gray-600 mb-4">View and search all customer records</p>
+            <div className="text-blue-600 font-medium">View Customers →</div>
+          </Link>
+
+          <Link
+              href="/rooms"
+              className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-lg transition-shadow border-t-4 border-green-500 hover:border-green-600"
           >
-            Read our docs
-          </a>
+            <h2 className="text-2xl font-semibold mb-2 text-gray-800">Room Availability</h2>
+            <p className="text-gray-600 mb-4">Check room availability by date range</p>
+            <div className="text-green-600 font-medium">Check Rooms →</div>
+          </Link>
+
+          <Link
+              href="/bookings"
+              className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-lg transition-shadow border-t-4 border-purple-500 hover:border-purple-600"
+          >
+            <h2 className="text-2xl font-semibold mb-2 text-gray-800">Bookings</h2>
+            <p className="text-gray-600 mb-4">View and filter bookings by date</p>
+            <div className="text-purple-600 font-medium">View Bookings →</div>
+          </Link>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </div>
   );
 }

@@ -3,6 +3,7 @@ package at.fhv.sys.hotel.commands.shared.events.customer;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Getter
@@ -13,13 +14,17 @@ public class CustomerUpdated {
     private String firstName;
     private String lastName;
     private String email;
+    private String address;
+    private LocalDate birthDate;
 
     public CustomerUpdated() {
     }
 
-    public CustomerUpdated(String firstName, String lastName, String email) {
+    public CustomerUpdated(String firstName, String lastName, String email, String address, LocalDate birthDate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.address = address;
+        this.birthDate = birthDate;
     }
 }

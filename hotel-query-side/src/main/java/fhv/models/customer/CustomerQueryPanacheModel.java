@@ -7,6 +7,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -17,21 +18,27 @@ public class CustomerQueryPanacheModel extends PanacheEntityBase {
     public String firstName;
     public String lastName;
     public String email;
+    public String address;
+    public LocalDate birthDate;
 
     public CustomerQueryPanacheModel() {
     }
 
-    public CustomerQueryPanacheModel(UUID customerId, String firstName, String lastName, String email) {
+    public CustomerQueryPanacheModel(UUID customerId, String firstName, String lastName, String email, String address, LocalDate birthDate) {
         this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.address = address;
+        this.birthDate = birthDate;
     }
 
-    public CustomerQueryPanacheModel(String firstName, String lastName, String email) {
+    public CustomerQueryPanacheModel(String firstName, String lastName, String email, String address, LocalDate birthDate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.address = address;
+        this.birthDate = birthDate;
     }
 
     public CustomerResponseDTO toDTO() {
@@ -39,7 +46,9 @@ public class CustomerQueryPanacheModel extends PanacheEntityBase {
                 this.customerId,
                 this.firstName,
                 this.lastName,
-                this.email);
+                this.email,
+                this.address,
+                this.birthDate);
     }
 
     @Override
@@ -49,6 +58,8 @@ public class CustomerQueryPanacheModel extends PanacheEntityBase {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", birthDate='" + birthDate + '\'' +
                 '}';
     }
 }

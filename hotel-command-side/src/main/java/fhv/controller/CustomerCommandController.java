@@ -19,12 +19,12 @@ public class CustomerCommandController {
     @POST
     @Path("/createCustomer")
     public String createCustomer(@BeanParam CustomerRequestDTO requestDTO) {
-        return customerAggregate.handle(new CreateCustomerCommand(requestDTO.getFirstName(), requestDTO.getLastname(), requestDTO.getEmail()));
+        return customerAggregate.handle(new CreateCustomerCommand(requestDTO.getFirstName(), requestDTO.getLastname(), requestDTO.getEmail(), requestDTO.getAddress(), requestDTO.getBirthDate()));
     }
 
     @POST
     @Path("/update")
     public String updateCustomer(@BeanParam CustomerRequestDTO requestDTO) {
-        return customerAggregate.handle(new UpdateCustomerCommand(requestDTO.getFirstName(), requestDTO.getLastname(), requestDTO.getEmail()));
+        return customerAggregate.handle(new UpdateCustomerCommand(requestDTO.getFirstName(), requestDTO.getLastname(), requestDTO.getEmail(), requestDTO.getAddress(), requestDTO.getBirthDate()));
     }
 }

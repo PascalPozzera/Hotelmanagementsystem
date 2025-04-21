@@ -4,15 +4,13 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Hotelmanagementsystem.iml" filepath="$PROJECT_DIR$/.idea/Hotelmanagementsystem.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/eventbus.main.iml" filepath="$PROJECT_DIR$/.idea/modules/eventbus.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-86893963/eventbus.share-events.main.iml" filepath="$PROJECT_DIR$/.idea/modules/-86893963/eventbus.share-events.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/87029008/eventbus.share-events.main.iml" filepath="$PROJECT_DIR$/.idea/modules/87029008/eventbus.share-events.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/eventbus.test.iml" filepath="$PROJECT_DIR$/.idea/modules/eventbus.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/hotel-command-side.main.iml" filepath="$PROJECT_DIR$/.idea/modules/hotel-command-side.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-86893963/hotel-command-side.share-events.main.iml" filepath="$PROJECT_DIR$/.idea/modules/-86893963/hotel-command-side.share-events.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/hotel-command-side.test.iml" filepath="$PROJECT_DIR$/.idea/modules/hotel-command-side.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/hotel-query-side.main.iml" filepath="$PROJECT_DIR$/.idea/modules/hotel-query-side.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-86893963/hotel-query-side.share-events.main.iml" filepath="$PROJECT_DIR$/.idea/modules/-86893963/hotel-query-side.share-events.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/hotel-query-side.test.iml" filepath="$PROJECT_DIR$/.idea/modules/hotel-query-side.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/share-events.main.iml" filepath="$PROJECT_DIR$/.idea/modules/share-events.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/share-events.test.iml" filepath="$PROJECT_DIR$/.idea/modules/share-events.test.iml" />
     </modules>
   </component>
 </project>

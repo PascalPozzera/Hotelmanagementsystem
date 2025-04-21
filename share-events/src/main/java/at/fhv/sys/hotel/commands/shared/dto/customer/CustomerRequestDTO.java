@@ -4,6 +4,8 @@ import jakarta.ws.rs.QueryParam;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 public class CustomerRequestDTO {
@@ -16,4 +18,10 @@ public class CustomerRequestDTO {
 
     @QueryParam("email")
     private String email;
+
+    @QueryParam("address")
+    private String address;
+
+    @QueryParam("birthDate")
+    private LocalDate birthDate;
 }

@@ -33,7 +33,9 @@ public class CustomerProjection {
                 customerCreatedEvent.getCustomerId(),
                 customerCreatedEvent.getFirstName(),
                 customerCreatedEvent.getLastName(),
-                customerCreatedEvent.getEmail());
+                customerCreatedEvent.getEmail(),
+                customerCreatedEvent.getAddress(),
+                customerCreatedEvent.getBirthDate());
 
         customerServicePanache.createCustomer(customer);
     }
@@ -44,7 +46,9 @@ public class CustomerProjection {
         CustomerQueryPanacheModel customer = new CustomerQueryPanacheModel(
                 customerUpdatedEvent.getFirstName(),
                 customerUpdatedEvent.getLastName(),
-                customerUpdatedEvent.getEmail());
+                customerUpdatedEvent.getEmail(),
+                customerUpdatedEvent.getAddress(),
+                customerUpdatedEvent.getBirthDate());
 
         customerServicePanache.updateCustomer(customer);
     }

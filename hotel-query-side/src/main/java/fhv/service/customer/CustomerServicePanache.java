@@ -42,6 +42,8 @@ public class CustomerServicePanache {
         if (existing != null) {
             existing.firstName = updatedCustomer.firstName;
             existing.lastName = updatedCustomer.lastName;
+            existing.address = updatedCustomer.address;
+            existing.birthDate = updatedCustomer.birthDate;
             Panache.getEntityManager().flush();
         }
     }

@@ -38,7 +38,7 @@ public class CustomerAggregate {
             throw new IllegalArgumentException("Email: " + command.email() + " already exist.");
         }
 
-        CustomerCreated event = new CustomerCreated(UUID.randomUUID(), command.firstName(), command.lastName(), command.email());
+        CustomerCreated event = new CustomerCreated(UUID.randomUUID(), command.firstName(), command.lastName(), command.email(), command.address(), command.birthDate());
 
         Logger.getAnonymousLogger().info(eventClient.processCustomerCreatedEvent(event).toString());
 
@@ -57,7 +57,7 @@ public class CustomerAggregate {
             throw new IllegalArgumentException("Email: " + command.email() + " does not exist.");
         }
 
-        CustomerUpdated event = new CustomerUpdated(command.firstName(), command.lastName(), command.email());
+        CustomerUpdated event = new CustomerUpdated(command.firstName(), command.lastName(), command.email(), command.address(), command.birthDate());
 
         Logger.getAnonymousLogger().info(eventClient.processCustomerUpdatedEvent(event).toString());
 

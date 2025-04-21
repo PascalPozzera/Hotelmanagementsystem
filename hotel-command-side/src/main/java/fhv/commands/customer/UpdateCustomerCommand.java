@@ -1,6 +1,8 @@
 package fhv.commands.customer;
 
 
-public record UpdateCustomerCommand(String firstName, String lastName, String email) {
+import java.time.LocalDate;
+
+public record UpdateCustomerCommand(String firstName, String lastName, String email, String address, LocalDate birthDate) {
 }
 

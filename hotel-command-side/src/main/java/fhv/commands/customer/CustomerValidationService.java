@@ -27,11 +27,11 @@ public class CustomerValidationService {
     CustomerQueryClient customerQueryClient;
 
     public List<String> validateCreateCustomerCommand(CreateCustomerCommand command) {
-        return checkCommands(command.firstName(), command.lastName(), command.email());
+        return checkCommands(command.firstName(), command.lastName(), command.email(), command.address(), command.birthDate());
     }
 
     public List<String> validateUpdateCustomerCommand(UpdateCustomerCommand command) {
-        return checkCommands(command.firstName(), command.lastName(), command.email());
+        return checkCommands(command.firstName(), command.lastName(), command.email(), command.address(), command.birthDate());
     }
 
     public boolean validateEmail(String email) {
@@ -49,7 +49,7 @@ public class CustomerValidationService {
         }
     }
 
-    private List<String> checkCommands(String firstName, String lastName, String email) {
+    private List<String> checkCommands(String firstName, String lastName, String email, String address, LocalDate birthDate) {
 
         List<String> errors = new ArrayList<>();
 
@@ -65,6 +65,14 @@ public class CustomerValidationService {
             errors.add("Email must not be null or empty.");
         } else if (!email.contains("@")) {
             errors.add("Email must be a valid address.");
+        }
+
+        if (address == null || address.isBlank()) {
+            errors.add("Address must not be null or empty.");
+        }
+
+        if (birthDate == null) {
+            errors.add("Birth date must not be null.");
         }
 
         return errors;

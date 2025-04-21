@@ -2,6 +2,8 @@ package at.fhv.sys.hotel.commands.shared.dto.customer;
 
 import jakarta.ws.rs.QueryParam;
 
+import java.time.LocalDate;
+
 public class UpdateCustomerRequestDTO {
 
     @QueryParam("firstName")
@@ -15,6 +17,12 @@ public class UpdateCustomerRequestDTO {
 
     @QueryParam("phone")
     private String phoneNumber;
+
+    @QueryParam("address")
+    private String address;
+
+    @QueryParam("birthDate")
+    private LocalDate birthDate;
 
 }
 
