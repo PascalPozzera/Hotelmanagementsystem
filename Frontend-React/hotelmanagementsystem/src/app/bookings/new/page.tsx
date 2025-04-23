@@ -1,11 +1,18 @@
-// app/bookings/new/page.tsx
 'use client';
 
 import { useSearchParams, useRouter } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import {useState, useEffect, Suspense} from 'react';
 import { COMMAND_API_URL } from '@/config';
 
 export default function NewBookingPage() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <NewBookingForm />
+        </Suspense>
+    )
+}
+
+function NewBookingForm() {
     const searchParams = useSearchParams();
     const router = useRouter();
 
@@ -19,7 +26,6 @@ export default function NewBookingPage() {
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const [success, setSuccess] = useState(false);
 
     useEffect(() => {
         setForm(prev => ({
@@ -42,7 +48,6 @@ export default function NewBookingPage() {
         e.preventDefault();
         setLoading(true);
         setError(null);
-        setSuccess(false);
 
         const params = new URLSearchParams({
             customerEmail: form.customerEmail,
@@ -57,7 +62,6 @@ export default function NewBookingPage() {
 
             if (!response.ok) throw new Error('Booking failed.');
 
-            setSuccess(true);
             router.push('/bookings');
         } catch (err) {
             console.error(err);
@@ -85,6 +89,7 @@ export default function NewBookingPage() {
                             type="text"
                             name="roomNumber"
                             value={form.roomNumber}
+                            onChange={handleChange}
                             required
                             className="w-full p-2 border border-gray-300 rounded"
                         />

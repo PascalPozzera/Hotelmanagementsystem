@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {HomeIcon, CalendarDaysIcon, UserGroupIcon, BuildingOffice2Icon, ArrowPathIcon  } from "@heroicons/react/24/outline";
+import {HomeIcon, CalendarDaysIcon, UserGroupIcon, BuildingOffice2Icon } from "@heroicons/react/24/outline";
 import NavLink from "@/components/NavLink";
 import ReplayEvents from "@/components/ReplayEvents";
 

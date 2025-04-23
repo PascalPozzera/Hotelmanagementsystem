@@ -10,6 +10,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/hotel-command-side.test.iml" filepath="$PROJECT_DIR$/.idea/modules/hotel-command-side.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/hotel-query-side.main.iml" filepath="$PROJECT_DIR$/.idea/modules/hotel-query-side.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/hotel-query-side.test.iml" filepath="$PROJECT_DIR$/.idea/modules/hotel-query-side.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/share-events.main.iml" filepath="$PROJECT_DIR$/.idea/modules/share-events.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/share-events.test.iml" filepath="$PROJECT_DIR$/.idea/modules/share-events.test.iml" />
     </modules>
   </component>

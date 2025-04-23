@@ -17,7 +17,6 @@ export default function NewCustomerPage() {
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const [success, setSuccess] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -27,7 +26,6 @@ export default function NewCustomerPage() {
         e.preventDefault();
         setLoading(true);
         setError(null);
-        setSuccess(false);
 
         const query = new URLSearchParams(form).toString();
         const url = COMMAND_API_URL + `/createCustomer?${query}`;
@@ -37,7 +35,6 @@ export default function NewCustomerPage() {
 
             if (!response.ok) throw new Error('Failed to create customer.');
 
-            setSuccess(true);
             router.push('/customers');
         } catch (err) {
             console.error(err);

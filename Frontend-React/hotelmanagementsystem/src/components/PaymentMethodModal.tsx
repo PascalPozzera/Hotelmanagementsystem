@@ -41,18 +41,18 @@ const PaymentMethodModal: React.FC<PaymentMethodModalProps> = ({
                         </option>
                     ))}
                 </select>
-                <div className="flex justify-between gap-4">
-                    <button
-                        onClick={onClose}
-                        className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400"
-                    >
-                        Cancel
-                    </button>
+                <div className="flex justify-end gap-4">
                     <button
                         onClick={() => onConfirm(selectedMethod)}
                         className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
                     >
                         Confirm
+                    </button>
+                    <button
+                        onClick={onClose}
+                        className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400"
+                    >
+                        Cancel
                     </button>
                 </div>
             </div>

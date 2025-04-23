@@ -8,14 +8,13 @@
         <processorPath useClasspath="false">
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.32/17d46b3e205515e1e8efd3ee4d57ce8018914163/lombok-1.18.32.jar" />
         </processorPath>
-        <module name="hotel-command-side.share-events.test" />
-        <module name="hotel-command-side.test" />
-        <module name="hotel-command-side.share-events.main" />
-        <module name="hotel-command-side.main" />
+        <module name="eventbus.main" />
+        <module name="eventbus.test" />
+        <module name="eventbus.share-events.test" />
+        <module name="at.fhv.sys.eventbus.share-events.main" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="share-events.main" target="17" />
       <module name="share-events.test" target="17" />
     </bytecodeTargetLevel>
   </component>

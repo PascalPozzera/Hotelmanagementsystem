@@ -6,14 +6,10 @@ import {EVENTBUS_API_URL} from "@/config";
 
 export default function ReplayEvents() {
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
-    const [success, setSuccess] = useState<boolean | null>(null);
 
     const replayEvents = async () => {
         try {
             setLoading(true);
-            setError(null);
-            setSuccess(null);
 
             const response = await fetch(EVENTBUS_API_URL+ '/replayEvents', {
                 method: 'POST',
@@ -23,11 +19,9 @@ export default function ReplayEvents() {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
-            const data = await response.json();
-            setSuccess(true);
+            await response.json();
         } catch (error) {
             console.error('Error replaying events:', error);
-            setError('Failed to replay events. Please try again later.');
         } finally {
             setLoading(false);
         }
