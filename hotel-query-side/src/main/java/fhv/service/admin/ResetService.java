@@ -2,7 +2,6 @@ package fhv.service.admin;
 
 import fhv.models.booking.BookingQueryPanacheModel;
 import fhv.models.customer.CustomerQueryPanacheModel;
-import fhv.models.room.RoomQueryPanacheModel;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 
@@ -13,6 +12,5 @@ public class ResetService {
     public void resetQueryModels() {
         BookingQueryPanacheModel.deleteAll();
         CustomerQueryPanacheModel.deleteAll();
-        RoomQueryPanacheModel.deleteAll();
     }
 }
