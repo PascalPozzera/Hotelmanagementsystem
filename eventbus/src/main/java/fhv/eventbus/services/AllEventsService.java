@@ -9,7 +9,7 @@ import jakarta.transaction.Transactional;
 import java.util.List;
 
 @ApplicationScoped
-public class EventQueryService {
+public class AllEventsService {
 
     @Inject
     StoredEventRepo storedEventRepo;

@@ -1,6 +1,5 @@
 package fhv.query.controller.admin;
 
-import fhv.models.booking.BookingQueryPanacheModel;
 import fhv.service.admin.ResetService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.POST;
