@@ -27,3 +27,11 @@ export interface RoomResponseDTO {
     withBalcony: boolean;
     description: string;
 }
+
+export interface StoredEventDTO {
+    id: number;
+    stream: string;
+    type: string;
+    payload: string;
+    timestamp: string;
+}
